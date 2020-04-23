@@ -1,1 +1,12 @@
-<app-items></app-items>
+<header>
+    <nav>
+        <ul>
+            <li><a [routerLink]="['/items']" [routerLinkActive]="['actived']">Items</a></li>
+            <li><a [routerLink]="['/create']" [routerLinkActive]="['actived']">Crear</a></li>
+          
+        </ul>
+    </nav>    
+</header>
+<section id="content">
+    <router-outlet></router-outlet>
+</section>

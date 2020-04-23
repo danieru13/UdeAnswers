@@ -1,1 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
+*{
+    margin: 0px;
+    padding: 0px;    
+}
+body{
+    background-attachment: fixed;    
+    background:rgba(245, 253, 250, 0.897)  
+}
+header{
+    display: block;
+    width: 100%;
+    height: 90px;
+    background: rgba(16, 182, 10, 0.8);    
+    text-transform: uppercase;    
+    position: fixed;
+}
+header ul{
+    display: block;    
+    width: 75%;
+    height: inherit;
+    margin: 0px auto;
+    line-height: 88px;
+}
+header ul li{
+    display: inline-block;
+    margin: 0px auto;
+    text-align: center;
+    line-height: 90px;
+}   
+header a{
+    display: block;
+    padding-right: 20px;
+    padding-left: 20px;
+    height: inherit;
+    text-decoration: none;
+    transition: all 300ms;
+    color: white;
+}
+
+header a:hover,
+.actived{
+    background: rgba(0, 0, 0, 0.8);
+}
+#content{
+    min-height: 550px;
+    padding-top: 100px;
+    width: 75%;
+    margin: 0px auto;
+    box-shadow: 0px 0px 40px black;
+    border-left: 1px solid #b7b7b7;
+    border-right: 1px solid #b7b7b7;
+    background: rgba(255, 255, 255, 0.7);
+} 
+

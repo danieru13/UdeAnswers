@@ -8,18 +8,26 @@ import { ItemService } from '../../services/item.service';
 })
 export class ItemsComponent implements OnInit {
 
-  items: Array<any> = [];
+  items=[];
+  it: any;
 
   constructor(private ItemService: ItemService) { }
 
-  ngOnInit(): void {
-    this.ItemService.getItems().then(snapshot => {
-      snapshot.forEach(doc => {
-        this.items.push(doc.data());
-      });
-    })
-    .catch(error => { console.log(error);
+  ngOnInit(){
+    // this.ItemService.getItems().then(snapshot => {
+    //   snapshot.forEach(doc => {
+    //     this.items.push(doc.data());        
+    //   });
+    // })
+    // .catch(error => { console.log(error);
+    // });
+    
+    this.ItemService.getItems().subscribe(item =>{      
+      this.items= item;
     });
+  }
+  deleteItem(item){
+    this.ItemService.deleteItem(item);
   }
 
 }

@@ -1,5 +1,13 @@
-<div>
-    <ul *ngFor="let item of items">
-        <li>{{item.nombre}}</li>
-    </ul>
+<div class="item-component">
+    <div *ngIf="items.length >0; else sinitems">
+    </div>
+    <div>
+        <ul *ngFor="let item of items">
+            <li>{{item.nombre}}</li>
+            <button (click)="deleteItem(item)">Borrar</button>        
+        </ul>        
+    </div>    
+    <ng-template #sinitems>
+        <span>No hay datos</span>
+    </ng-template>
 </div>
