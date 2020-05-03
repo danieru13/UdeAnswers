@@ -1,12 +1,11 @@
-<header>
-    <nav>
+<nav id="navbar">
+    <div class="container">
         <ul>
             <li><a [routerLink]="['/items']" [routerLinkActive]="['actived']">Items</a></li>
             <li><a [routerLink]="['/create']" [routerLinkActive]="['actived']">Crear</a></li>
-          
         </ul>
-    </nav>    
-</header>
-<section id="content">
-    <router-outlet></router-outlet>
-</section>
+    </div>
+</nav>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
