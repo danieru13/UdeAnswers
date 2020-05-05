@@ -2,10 +2,12 @@
     <div class="container">
         <ul>
             <li><a [routerLink]="['/items']" [routerLinkActive]="['actived']">Inicio</a></li>
-            <li><a [routerLink]="['/create']" [routerLinkActive]="['actived']">Crear</a></li>
         </ul>
     </div>
 </nav>
     <div class="container">
-        <router-outlet></router-outlet>
+        <app-create></app-create>
+    </div>
+    <div class="container">
+        <app-items></app-items>
     </div>
