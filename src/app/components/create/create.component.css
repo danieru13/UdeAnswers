@@ -1,0 +1,35 @@
+form input[type="text"]{
+    width: 90%;
+    padding: 5px
+}
+form{
+    padding-left: 5px;
+    margin-top: 10px;
+}
+form h2{
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    text-align: left;
+    font-size: 1.5rem;
+	color: black;
+}
+form input[type="submit"]{
+    font-size: 17px;
+    padding:10px;
+    display: block;
+    margin-top: 10px;
+    color: white;
+    background: #046424;
+    border: 1px solid #03551e;
+    cursor: pointer;
+}
+form input[type="submit"]:hover{   
+    background: #046424a6;  
+}
+form input[disabled]{
+    opacity: 0.4;
+    cursor: not-allowed;    
+}
+.card{
+    width: 500px;
+}

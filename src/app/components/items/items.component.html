@@ -1,0 +1,19 @@
+<div class="item-component">
+    <div *ngIf="items.length >0; else sinitems">
+    </div>
+    <div>
+        <ul *ngFor="let item of items">
+            <div class="card">
+                <li>
+                    <h1>
+                        {{item.nombre}}
+                    </h1>
+                </li>
+                <a (click)="deleteItem(item)" class="button3">Borrar</a>  
+            </div>      
+        </ul>        
+    </div>    
+    <ng-template #sinitems>
+        <span>No hay datos</span>
+    </ng-template>
+</div>

@@ -1,0 +1,7 @@
+<div class="card">
+    <form #questionForm = "ngForm" (ngSubmit)="onSubmit(questionForm)">
+        <h2>Ingrese pregunta</h2>                        
+        <input type="text" name="nombre" #nombre="ngModel" [(ngModel)]="question.nombre" required>            
+        <input type="submit" value="Enviar" [disabled]="!questionForm.form.valid">
+    </form>    
+</div>  
