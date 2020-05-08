@@ -1,9 +1,14 @@
 <nav id="navbar">
-  <div class="container">
-      <ul>
-          <li><a>Inicio</a></li>
-      </ul>
-  </div>
+  
+    <div class="container">
+        <ul>
+            <li><a [routerLink]="['/questions']" [routerLinkActive]="['actived']">Inicio</a></li>
+        </ul>
+    </div>
 </nav>
-
-<app-user-login></app-user-login>
+    <div class="container">
+        <app-question-create></app-question-create>
+    </div>
+    <div class="container">
+        <app-question-list></app-question-list>
+    </div>

@@ -1,0 +1,19 @@
+<div class="question-component">
+    <div *ngIf="questions.length >0; else sinitems">
+    </div>
+    <div>
+        <ul *ngFor="let question of questions">
+            <div class="card">
+                <li>
+                    <h1>
+                        {{question.content}}
+                    </h1>
+                </li>
+                <a (click)="deleteQuestion(question)" class="button3">Borrar</a>  
+            </div>      
+        </ul>        
+    </div>    
+    <ng-template #sinitems>
+        <span>No hay datos</span>
+    </ng-template>
+</div>
