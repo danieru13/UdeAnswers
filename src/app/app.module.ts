@@ -10,6 +10,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { QuestionCreateComponent } from './components/question-create/question-create.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { QuestionCreateComponent } from './components/question-create/question-c
     AppComponent,
     QuestionListComponent,
     QuestionCreateComponent,
+    UserLoginComponent,
   ],
   imports: [
     BrowserModule,
