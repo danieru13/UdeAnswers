@@ -7,13 +7,14 @@ import {Question} from '../models/question'
 @Injectable({
   providedIn: 'root'
 })
-export class ItemService {
+export class QuestionService {
 
-  private items = "item";
   private questions: Observable<Question[]>;
   private questionsCollection: AngularFirestoreCollection<Question>;
-  private itemDoc: AngularFirestoreDocument<Question>;
-  private db = this.firestore.collection(this.items);
+  private questionDoc: AngularFirestoreDocument<Question>;
+
+  private collectionName = "questions";
+  private db = this.firestore.collection(this.collectionName);
 
   constructor(private firestore: AngularFirestore) {
       this.questionsCollection = this.db;
@@ -26,19 +27,19 @@ export class ItemService {
       }))      
    }
 
-  getItems(){
+  getQuestions(){
     //return this.firestore.collection(this.items).get().toPromise();
     return this.questions;
   }
-  deleteItem(item: Question){
-    this.itemDoc= this.firestore.doc(`item/${item._id}`)
-    this.itemDoc.delete();
+  deleteQuestion(question: Question){
+    this.questionDoc= this.firestore.doc(`questions/${question._id}`)
+    this.questionDoc.delete();
   }
-  getItemById(id){
+  /*getQuestionById(id){
     return this.db.doc(id).get().toPromise();
-  }
-  addItem(item : Question){
-    this.questionsCollection.add(item);
+  }*/
+  addQuestion(question : Question){
+    this.questionsCollection.add(question);
   }
   
 }

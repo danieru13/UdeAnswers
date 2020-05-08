@@ -1,15 +1,15 @@
-<div class="item-component">
-    <div *ngIf="items.length >0; else sinitems">
+<div class="question-component">
+    <div *ngIf="questions.length >0; else sinitems">
     </div>
     <div>
-        <ul *ngFor="let item of items">
+        <ul *ngFor="let question of questions">
             <div class="card">
                 <li>
                     <h1>
-                        {{item.nombre}}
+                        {{question.content}}
                     </h1>
                 </li>
-                <a (click)="deleteItem(item)" class="button3">Borrar</a>  
+                <a (click)="deleteQuestion(question)" class="button3">Borrar</a>  
             </div>      
         </ul>        
     </div>    

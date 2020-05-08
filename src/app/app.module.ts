@@ -8,15 +8,15 @@ import { environment } from '../environments/environment';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule} from '@angular/fire/firestore';
-import { ItemsComponent } from './components/items/items.component';
-import { CreateComponent } from './components/create/create.component';
+import { QuestionListComponent } from './components/question-list/question-list.component';
+import { QuestionCreateComponent } from './components/question-create/question-create.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ItemsComponent,
-    CreateComponent,
+    QuestionListComponent,
+    QuestionCreateComponent,
   ],
   imports: [
     BrowserModule,
