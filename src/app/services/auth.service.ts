@@ -42,7 +42,7 @@ export class AuthService {
 
    async signOut() {
      await this.afAuth.signOut();
-     return this.router.navigate(['/']);
+     return this.router.navigate(['/login']);
    }
 
    private updateUserData({ uid, email, displayName, photoURL }: User) {
@@ -59,4 +59,10 @@ export class AuthService {
      return userRef.set(data, { merge: true });
    }
 
+   login() {
+     this.googleSignin().then(()=>{
+       this.router.navigate(['/']);
+     })
+   }
+   
 }

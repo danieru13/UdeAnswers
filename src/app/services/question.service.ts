@@ -27,17 +27,13 @@ export class QuestionService {
     }))
   }
 
-  getQuestions() {
-    //return this.firestore.collection(this.items).get().toPromise();
+  getQuestions() {    
     return this.questions;
   }
   deleteQuestion(question: Question) {
     this.questionDoc = this.firestore.doc(`questions/${question._id}`)
     this.questionDoc.delete();
-  }
-  /*getQuestionById(id){
-    return this.db.doc(id).get().toPromise();
-  }*/
+  }  
   addQuestion(question: Question) {
     this.questionsCollection.add(question);
   }
