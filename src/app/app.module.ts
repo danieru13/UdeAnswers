@@ -11,6 +11,8 @@ import { AngularFirestoreModule} from '@angular/fire/firestore';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { QuestionCreateComponent } from './components/question-create/question-create.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
+import { QuestionSearchComponent } from './components/question-search/question-search.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { UserLoginComponent } from './components/user-login/user-login.component
     QuestionListComponent,
     QuestionCreateComponent,
     UserLoginComponent,
+    QuestionSearchComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

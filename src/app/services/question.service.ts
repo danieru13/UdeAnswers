@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators'
 import {Question} from '../models/question'
+import { QuestionSearchComponent } from '../components/question-search/question-search.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,12 @@ import {Question} from '../models/question'
 export class QuestionService {
 
   private questions: Observable<Question[]>;
+  
   private questionsCollection: AngularFirestoreCollection<Question>;
   private questionDoc: AngularFirestoreDocument<Question>;
-
   private collectionName = "questions";
   private db = this.firestore.collection(this.collectionName);
+  result : Question[];
 
   constructor(private firestore: AngularFirestore) {
       this.questionsCollection = this.db;
@@ -41,5 +43,26 @@ export class QuestionService {
   addQuestion(question : Question){
     this.questionsCollection.add(question);
   }
-  
+  searchQuestion(s: string){
+    if(this.questions === undefined){
+        this.getQuestions().toPromise().then(()=>{
+            this.filter(s);
+        })
+    }else{
+        this.filter(s);
+    }
+  }
+  filter(s:string){
+      this.result=[];      
+      s = s.toLocaleLowerCase();
+      this.questions.subscribe((question)=>{
+            console.log(question);
+            question.forEach((q)=>{
+                const lower = q.content.toLocaleLowerCase();                
+                if(lower.indexOf(s)>=0){
+                  this.result.push(q)
+                }
+            })                 
+      })  
+  } 
 }

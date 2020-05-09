@@ -43,6 +43,12 @@ body{
 .actived{
     background: rgba(0, 0, 0, 0.8);
 }
+#navbar .box{
+	float: right;
+    margin-top: -41px;
+    margin-right: 5px;
+    padding: 2px;
+  }
 .container{
 	display: flex;
 	flex-wrap: wrap;

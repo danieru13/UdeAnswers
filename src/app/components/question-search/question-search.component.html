@@ -1,16 +1,14 @@
-<app-question-create></app-question-create> 
 <div class="question-component">
-    <div *ngIf="questions.length >0; else sinitems">
+    <div *ngIf="_questions.result.length >0; else sinitems">
     </div>
     <div>
-        <ul *ngFor="let question of questions">
+        <ul *ngFor="let question of _questions.result">
             <div class="card">
                 <li>
                     <h1>
                         {{question.content}}
                     </h1>
-                </li>
-                <a (click)="deleteQuestion(question)" class="button3">Borrar</a>  
+                </li>                  
             </div>      
         </ul>        
     </div>    
