@@ -14,14 +14,6 @@ export class QuestionListComponent implements OnInit {
   constructor(private QuestionService: QuestionService) { }
 
   ngOnInit(){
-    // this.ItemService.getItems().then(snapshot => {
-    //   snapshot.forEach(doc => {
-    //     this.items.push(doc.data());        
-    //   });
-    // })
-    // .catch(error => { console.log(error);
-    // });
-    console.log("test");
     this.QuestionService.getQuestions().subscribe(questions =>{      
       this.questions = questions;
     });

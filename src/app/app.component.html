@@ -1,11 +1,6 @@
-<nav id="navbar">
-  
-    <div class="container">
-        <ul>
-            <li><a [routerLink]="['/questions']" [routerLinkActive]="['actived']">Inicio</a></li>
-        </ul>
-    </div>
-</nav>
-    <div class="container">
-        <router-outlet></router-outlet>
-    </div>
+<app-navbar></app-navbar>
+<section class="container">
+    <router-outlet></router-outlet>    
+    
+</section>
+

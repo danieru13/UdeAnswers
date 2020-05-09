@@ -1,0 +1,10 @@
+<nav id="navbar">  
+    <div class="container">
+        <ul>
+            <li>
+                <a [routerLink]="['/questions']" [routerLinkActive]="['actived']">Inicio</a>                
+            </li>            
+        </ul>        
+    </div>   
+    <input class="box" (keyup.enter)="search(txtSearch.value)" type="text" id="search" placeholder="Buscar..." #txtSearch/>           
+</nav>
