@@ -9,13 +9,13 @@ import { QuestionService } from '../../services/question.service';
 })
 export class QuestionSearchComponent implements OnInit {
 
-  aux: any=[];
+  
   constructor(private route: ActivatedRoute, 
               public _questions : QuestionService) { }
   
   ngOnInit(): void {
     this.route.params.subscribe(params=>{      
-      this.aux = this._questions.searchQuestion(params['busqueda']);      
+       this._questions.searchQuestion(params['query']);      
     })
   }
 

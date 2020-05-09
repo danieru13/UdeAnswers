@@ -7,7 +7,7 @@ import { QuestionSearchComponent } from './components/question-search/question-s
 const routes: Routes = [
   {path: '',component:QuestionListComponent},
   {path: 'questions',component:QuestionListComponent},
-  {path: 'search/:busqueda',component:QuestionSearchComponent},
+  {path: 'search/:query',component:QuestionSearchComponent},
 ];
 
 @NgModule({

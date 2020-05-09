@@ -13,12 +13,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  search(busqueda: string) {
+  search(query: string) {
 
-    if (busqueda.length < 1) {
+    if (query.length < 1) {
       return;
     }
-    this.router.navigate(['/search', busqueda]);
+    this.router.navigate(['/search', query]);
   }
 
 }
