@@ -21,7 +21,7 @@ export class QuestionListComponent implements OnInit {
     // })
     // .catch(error => { console.log(error);
     // });
-    
+    console.log("test");
     this.QuestionService.getQuestions().subscribe(questions =>{      
       this.questions = questions;
     });
