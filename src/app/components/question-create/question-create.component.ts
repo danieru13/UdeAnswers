@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Question} from '../../models/question'
+
 import { QuestionService } from '../../services/question.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-question-create',
@@ -11,15 +13,24 @@ export class QuestionCreateComponent implements OnInit {
 
   public question: Question = {}
 
-  constructor(private questionService: QuestionService) {}  
+  constructor(private questionService: QuestionService, public auth: AuthService) {}  
 
-  ngOnInit(): void {
+  ngOnInit() { 
+    this.getUId();    
   }
-  onSubmit(form){       
 
-    this.questionService.addQuestion(this.question)
+  async getUId() {
+    await this.auth.user$.subscribe( data => {
+      this.question.author = data.uid;
+      return this.question.author;
+     });
+  }
+  
+  onSubmit(form){
+    
+    this.questionService.addQuestion(this.question);
     form.reset();
-    this.question = {}
+    this.question.content = "";
    }
 
 }
