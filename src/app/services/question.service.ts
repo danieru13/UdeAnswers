@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Observable, merge } from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Question } from '../models/question'
 
@@ -35,7 +35,23 @@ export class QuestionService {
     this.questionDoc.delete();
   }  
   addQuestion(question: Question) {
-    this.questionsCollection.add(question);
+    
+    this.questionsCollection.add(question).then(data=>{
+      var id= data.id
+      var u = {
+        _id: id
+      }
+      this.updateQuestionId(u);
+    });    
+  }
+  private updateQuestionId({ _id}: Question) {
+
+    const ref: AngularFirestoreDocument<Question> = this.firestore.doc(`questions/${_id}`);
+    const data = {
+      _id,
+    };
+
+    return ref.set(data, { merge: true });
   }
   searchQuestion(s: string) {
     if (this.questions === undefined) {
