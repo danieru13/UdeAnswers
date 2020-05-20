@@ -13,6 +13,7 @@ import { QuestionCreateComponent } from './components/question-create/question-c
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { QuestionSearchComponent } from './components/question-search/question-search.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { QuestionComponent } from './components/question/question.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     UserLoginComponent,
     QuestionSearchComponent,
     NavbarComponent,
+    QuestionComponent,
   ],
   imports: [
     BrowserModule,
