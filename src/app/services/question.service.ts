@@ -30,7 +30,7 @@ export class QuestionService {
   getQuestions() {    
     return this.questions;
   }
-  
+
   getQuestionById(id) {
     return this.db.doc(id).get();
   }
