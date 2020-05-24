@@ -36,7 +36,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
         });
       }
 
-      this.getUId();
+      this.getUId(); 
     });
 
   }

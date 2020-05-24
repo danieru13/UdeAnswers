@@ -4,6 +4,9 @@
             <li>
                 <a [routerLink]="['/questions']" [routerLinkActive]="['actived']">Inicio</a>                
             </li>            
+            <li>
+                <a [routerLink]="['/profile', uid]" [routerLinkActive]="['actived']">Perfil</a>                
+            </li>  
         </ul>        
     </div>   
     <input class="box" (keyup.enter)="search(txtSearch.value)" type="text" id="search" placeholder="Buscar..." #txtSearch/>           

@@ -14,6 +14,7 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { QuestionSearchComponent } from './components/question-search/question-search.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { QuestionComponent } from './components/question/question.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { QuestionComponent } from './components/question/question.component';
     QuestionSearchComponent,
     NavbarComponent,
     QuestionComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

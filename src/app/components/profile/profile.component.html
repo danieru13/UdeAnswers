@@ -1,0 +1,19 @@
+<div>
+    <div *ngIf="user else loading">
+        <div>
+            <img src="{{user.photoURL}}" alt="{{user.displayName}}">
+            <p>{{user.displayName}}</p>
+            <hr>
+        </div>
+    
+        <div *ngIf="flag">
+            <button>Responder preguntas</button>
+            <button>Ver mis preguntas</button>
+            <button>Favoritos</button>
+        </div>        
+    </div>
+    <ng-template #loading>
+        <span>Cargando...</span>
+    </ng-template>
+    
+</div>

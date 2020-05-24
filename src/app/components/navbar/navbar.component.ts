@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -9,9 +10,13 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  uid: string = '';
+  constructor(private router: Router,
+              private auth: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.getUId();
   }
   search(query: string) {
 
@@ -20,5 +25,12 @@ export class NavbarComponent implements OnInit {
     }
     this.router.navigate(['/search', query]);
   }
+  async getUId() {
+    await this.auth.user$.subscribe( data => {
+      this.uid = data.uid;
+      return this.uid;
+     });
+  }
+
 
 }
