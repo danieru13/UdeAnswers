@@ -1,13 +1,28 @@
-<nav id="navbar">  
+<nav id="navbar">
     <div class="container">
-        <ul>
+        <ul *ngIf="user$ | async as user; else login">
             <li>
-                <a [routerLink]="['/questions']" [routerLinkActive]="['actived']">Inicio</a>                
-            </li>            
+                <a [routerLink]="['/questions']" [routerLinkActive]="['actived']">Inicio</a>
+            </li>
             <li>
-                <a [routerLink]="['/profile', uid]" [routerLinkActive]="['actived']">Perfil</a>                
-            </li>  
-        </ul>        
-    </div>   
-    <input class="box" (keyup.enter)="search(txtSearch.value)" type="text" id="search" placeholder="Buscar..." #txtSearch/>           
+                <a [routerLink]="['/profile', user.uid]" [routerLinkActive]="['actived']">Perfil</a>
+            </li>
+            <li *ngIf="user">
+                <a (click)="authService.signOut()">Logout </a>
+            </li>     
+            <li>
+                <p>{{user.displayName}}</p>
+            </li>       
+        </ul>
+        
+        <ng-template #login>
+            <ul>
+                <li>
+                    <a [routerLink]="['/login']">Login </a>
+                </li>
+            </ul>
+        </ng-template>
+    </div>
+    <input class="box" (keyup.enter)="search(txtSearch.value)" type="text" id="search" placeholder="Buscar..."
+        #txtSearch />
 </nav>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
+import { auth } from 'firebase/app';
 
 
 @Component({
@@ -11,26 +13,18 @@ import { AuthService } from '../../services/auth.service';
 export class NavbarComponent implements OnInit {
 
   uid: string = '';
+  public user$: Observable<any> = this.authService.afAuth.user;
   constructor(private router: Router,
-              private auth: AuthService
+              public authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.getUId();
+    
   }
   search(query: string) {
-
     if (query.length < 1) {
       return;
     }
     this.router.navigate(['/search', query]);
-  }
-  async getUId() {
-    await this.auth.user$.subscribe( data => {
-      this.uid = data.uid;
-      return this.uid;
-     });
-  }
-
-
+  }  
 }

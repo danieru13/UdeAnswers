@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { QuestionService } from '../../services/question.service';
 import { AuthService } from '../../services/auth.service';
-import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +10,9 @@ import { User } from '../../models/user.model';
 export class ProfileComponent implements OnInit {
 
   uid: String = '';
-  user: any;  
+  user: any;
   flag = true;
-  constructor(private route: ActivatedRoute,    
+  constructor(private route: ActivatedRoute,
     private auth: AuthService
   ) { }
 
@@ -23,22 +21,30 @@ export class ProfileComponent implements OnInit {
   }
   async getUser() {
     await this.auth.user$.subscribe(data => {
-      this.uid = data.uid;      
       this.route.params.subscribe(params => {
         const uid = params['uid'];
         if (uid) {
-          if (uid != data.uid) {
-            this.auth.getUserById(uid).valueChanges().subscribe(d=>{
+          if (data) {
+            this.uid = data.uid;
+            if (uid != data.uid) {
+              this.auth.getUserById(uid).valueChanges().subscribe(d => {
+                this.user = d;
+                this.flag = false;
+              })
+            }
+            else {
+              this.user = data;
+            }
+          }
+          else {
+            this.auth.getUserById(uid).valueChanges().subscribe(d => {
               this.user = d;
-              this.flag =false;
-            })            
+              this.flag = false;
+            })
           }
-          else{
-            this.user = data;
-          }
-        } 
-      });      
-    });    
+        }
+      });
+    });
   }
 
 }
