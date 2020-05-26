@@ -5,6 +5,6 @@ export class Question{
     public _id?: string,
     public author?: string,
     public content?: string,
-    public responses?: AngularFirestoreCollection<Answer>
+    public responses?: any[]
     ){}
 }

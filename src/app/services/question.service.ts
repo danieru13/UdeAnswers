@@ -43,13 +43,16 @@ export class QuestionService {
   addQuestion(question: Question) {
     
     this.questionsCollection.add(question).then(data=>{
-      var id= data.id
+      var id= data.id      
       var u = {
         _id: id
       }
       this.updateQuestionId(u);
+      var a = this.firestore.doc(`questions/${id}`).collection("responses")
+      a.doc(id).set({})      
     });    
   }
+  
   private updateQuestionId({ _id}: Question) {
 
     const ref: AngularFirestoreDocument<Question> = this.firestore.doc(`questions/${_id}`);
@@ -69,6 +72,7 @@ export class QuestionService {
       content,
       responses
     };
+    
     return ref.set(data,{merge:true});
     
   }

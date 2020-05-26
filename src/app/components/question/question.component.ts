@@ -28,7 +28,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       if (id) {
         this.questionService.getQuestionById(id).subscribe((question: any) => {
           if (question) {
-            this.question = question.data();            
+            this.question = question.data();                    
           } else {
             console.log(`Question with id '${id}' not found, returning to list`);
             this.gotoList();

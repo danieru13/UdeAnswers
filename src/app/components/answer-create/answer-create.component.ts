@@ -17,12 +17,13 @@ export class AnswerCreateComponent implements OnInit {
   ngOnInit() {        
   }
   
-  async onSubmit(form){
+  onSubmit(form){
     
-    this.answerService.addAnswer(this.answer,this.questionId);
-    
+    this.answerService.addAnswer(this.answer,this.questionId)
     form.reset();
     this.answer.content = "";
+    
+    
    }
 
 }

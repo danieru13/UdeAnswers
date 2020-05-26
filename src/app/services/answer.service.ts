@@ -31,33 +31,23 @@ export class AnswerService {
   getAnswers(){
     return this.answers;
   }
-  async addAnswer(answer:Answer, qId){
-    this.answersCollection.add(answer).then(data=>{
+ addAnswer(answer:Answer, qId){
+    var a = answer.content;
+    this.answersCollection.add(answer).then(data=>{      
       var id= data.id      
       var u = {
         id: id
       }
-      this.updateAnswerId(u);     
-      //var question = this.questionService.getQuestionById(qId)
-      
-      // question.subscribe((q:any)=>{
-        
-      //   if(q){
-
-      //     const d = {
-      //       _id: q.data()._id,
-      //       author : q.data().author,
-      //       content : q.data().content,                
-      //       responses: this.db
-      //     }
-      //     this.questionService.updateQuestion(d);
-      //   }
-      // }) 
-      
-    });        
-   
-  
-    return this.question
+      this.updateAnswerId(u);       
+      var question = this.questionService.getQuestionById(qId)      
+      question.subscribe((q:any)=>{        
+        var collection = this.afs.doc(`questions/${qId}`).collection("responses")        
+         collection.doc(id).set({
+           id:id,
+           content:a
+         })  
+      })            
+    });            
   }
   updateAnswerId({id}){
     const ref: AngularFirestoreDocument<Answer> = this.afs.doc(`answers/${id}`);
