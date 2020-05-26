@@ -16,7 +16,7 @@ export class AnswerService {
   private answerDoc: AngularFirestoreDocument<Answer>;
   private collectionName = "answers";
   private db = this.afs.collection(this.collectionName);  
-  public question: any = {}
+  public response: Observable<Answer[]>
 
   constructor(private afs: AngularFirestore,private questionService: QuestionService) { 
     this.answersCollection = this.db;
@@ -45,7 +45,7 @@ export class AnswerService {
          collection.doc(id).set({
            id:id,
            content:a
-         })  
+         }) 
       })            
     });            
   }
@@ -58,5 +58,17 @@ export class AnswerService {
   }
   getAnswerById(id){
     return this.db.doc(id).get();
+  }
+  getResponses(id){
+    var res = "responses";
+    var collection = this.afs.doc(`questions/${id}`).collection(res)
+    var responses: Observable<Answer[]>
+           responses = collection.snapshotChanges().pipe(map(actions=>{
+             return actions.map(a=>{
+               const d = a.payload.doc.data() as Answer;                             
+               return d;
+             })
+           }))           
+    return responses;
   }
 }

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router'
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { AnswerService } from '../../services/answer.service';
 
 
 @Component({
@@ -16,19 +17,24 @@ export class QuestionComponent implements OnInit, OnDestroy {
   uid: string = '';
   flag = false;
   sub: Subscription;
+  responses=[];
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private questionService: QuestionService,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private answerService: AnswerService) { }
 
   ngOnInit(): void {
+    
     this.sub = this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
         this.questionService.getQuestionById(id).subscribe((question: any) => {
           if (question) {
-            this.question = question.data();                    
+            this.question = question.data();
+            this.getResponses(id)
+
           } else {
             console.log(`Question with id '${id}' not found, returning to list`);
             this.gotoList();
@@ -39,6 +45,12 @@ export class QuestionComponent implements OnInit, OnDestroy {
       this.getUId();
     });
 
+  }
+  getResponses(id){
+    this.answerService.getResponses(id).subscribe(answers=>{
+      this.responses = answers;
+    })
+    
   }
 
   ngOnDestroy() {
