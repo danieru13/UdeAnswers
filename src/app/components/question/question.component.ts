@@ -14,7 +14,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   question: any = {};
   uid: string = '';
-
+  flag = false;
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
@@ -28,7 +28,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       if (id) {
         this.questionService.getQuestionById(id).subscribe((question: any) => {
           if (question) {
-            this.question = question.data();
+            this.question = question.data();            
           } else {
             console.log(`Question with id '${id}' not found, returning to list`);
             this.gotoList();
@@ -67,6 +67,9 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.questionService.deleteQuestion(question);
     this.gotoList();
     }
+  }
+  answer(){
+    this.flag= true;
   }
 
 }

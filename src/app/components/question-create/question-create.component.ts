@@ -3,6 +3,8 @@ import {Question} from '../../models/question'
 
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from '../../services/auth.service';
+import { AngularFirestoreCollection } from '@angular/fire/firestore/public_api';
+import { Answer } from '../../models/answer';
 
 @Component({
   selector: 'app-question-create',
@@ -12,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
 export class QuestionCreateComponent implements OnInit {
 
   public question: Question = {}
-
+  responses : AngularFirestoreCollection;
   constructor(private questionService: QuestionService, public auth: AuthService) {}  
 
   ngOnInit() { 
@@ -27,7 +29,7 @@ export class QuestionCreateComponent implements OnInit {
   }
   
   onSubmit(form){
-    
+    this.responses
     this.questionService.addQuestion(this.question);
     form.reset();
     this.question.content = "";

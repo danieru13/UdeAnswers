@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable, merge } from 'rxjs';
+import { Observable} from 'rxjs';
 import { map } from 'rxjs/operators'
-import { Question } from '../models/question'
+import { Question } from '../models/question';
+import { auth } from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,19 @@ export class QuestionService {
     };
 
     return ref.set(data, { merge: true });
+  }
+  public updateQuestion({_id,author,content,responses}:Question){
+    
+    const ref: AngularFirestoreDocument<Question> = this.firestore.doc(`questions/${_id}`)
+    
+    const data = {
+      _id,
+      author,
+      content,
+      responses
+    };
+    return ref.set(data,{merge:true});
+    
   }
   searchQuestion(s: string) {
     if (this.questions === undefined) {

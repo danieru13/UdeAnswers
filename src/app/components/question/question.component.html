@@ -1,4 +1,6 @@
 <div class="card">
     <h1>{{question.content}}</h1>
+    <a *ngIf="!isAuthor(question)"(click)="answer()" class="button3">Responder</a>  
     <a *ngIf="isAuthor(question)" (click)="deleteQuestion(question)" class="button3">Borrar</a>  
 </div>
+<app-answer-create *ngIf="flag" [questionId]="question._id"></app-answer-create>

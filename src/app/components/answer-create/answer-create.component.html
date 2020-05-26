@@ -1,0 +1,7 @@
+<div class="card">
+    <form #answerForm = "ngForm" (ngSubmit)="onSubmit(answerForm)">                                
+        <textarea name="content" #content="ngModel" [(ngModel)]="answer.content" required></textarea>            
+        <input type="submit" value="Enviar" [disabled]="!answerForm.form.valid">   
+        {{questionId}}     
+    </form>    
+</div>  
