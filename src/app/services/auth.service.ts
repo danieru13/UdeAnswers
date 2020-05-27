@@ -19,7 +19,7 @@ export class AuthService {
   user$: Observable<User>;
 
   constructor(
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router
   ) {
@@ -48,7 +48,7 @@ export class AuthService {
    private updateUserData({ uid, email, displayName, photoURL }: User) {
      //Sets user data to firestore on login
      const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${uid}`);
-
+    
      const data = {
        uid,
        email,
@@ -58,6 +58,9 @@ export class AuthService {
 
      return userRef.set(data, { merge: true });
    }
+   getUserById(uid) {
+      return this.afs.doc(`users/${uid}`);
+  }
 
    login() {
      this.googleSignin().then(()=>{
