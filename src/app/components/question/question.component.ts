@@ -34,14 +34,12 @@ export class QuestionComponent implements OnInit, OnDestroy {
           if (question) {
             this.question = question.data();
             this.getResponses(id)
-
           } else {
             console.log(`Question with id '${id}' not found, returning to list`);
             this.gotoList();
           }
         });
       }
-
       this.getUId();
     });
 

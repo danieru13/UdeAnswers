@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable} from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Question } from '../models/question';
-import { auth } from 'firebase/app';
+
 
 @Injectable({
   providedIn: 'root'
@@ -37,19 +37,22 @@ export class QuestionService {
   }
 
   deleteQuestion(question: Question) {
-    this.questionDoc = this.firestore.doc(`questions/${question._id}`)
-    this.questionDoc.delete();
+       
+    this.questionDoc = this.firestore.doc(`questions/${question._id}`)    
+    this.questionDoc.delete()
+    
   }  
+ 
   addQuestion(question: Question) {
     
     this.questionsCollection.add(question).then(data=>{
       var id= data.id      
       var u = {
         _id: id
-      }
-      this.updateQuestionId(u);
+      }      
       var a = this.firestore.doc(`questions/${id}`).collection("responses")
       a.doc(id).set({})      
+      this.updateQuestionId(u);
     });    
   }
   
