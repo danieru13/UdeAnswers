@@ -12,8 +12,8 @@ const routes: Routes = [
   {path: '', redirectTo: '/questions', pathMatch: 'full'},
   {path: 'questions', component:QuestionListComponent, canActivate: [AuthGuard]},
   {path: 'question/:id', component: QuestionComponent, canActivate: [AuthGuard]},
-  {path: 'search/:query', component:QuestionSearchComponent},
-  {path: 'profile/:uid', component:ProfileComponent},
+  {path: 'profile/:uid', component:ProfileComponent, canActivate:[AuthGuard]},
+  {path: 'search/:query', component:QuestionSearchComponent},  
   {path: 'login', component: UserLoginComponent}
 ];
 
