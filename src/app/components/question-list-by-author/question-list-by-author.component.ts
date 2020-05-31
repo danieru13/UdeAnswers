@@ -8,13 +8,24 @@ import { QuestionService } from '../../services/question.service';
 })
 export class QuestionListByAuthorComponent implements OnInit {
   
-  @Input() uid: string;
+  private _uid = '';
+
+  @Input() 
+  set uid(uid: string) {
+    this._uid = (uid);
+    this.getData(); 
+  };
+
+  get uid(): string { return this._uid; }
   questions = [];
 
   constructor(private questionsService: QuestionService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  getData(): void {
     if(this.uid){
+      this.questions = []
       this.questionsService.getQuestionsByAuthor(this.uid).subscribe((questions: any) => {
         if(questions){
           questions.forEach( doc => {
