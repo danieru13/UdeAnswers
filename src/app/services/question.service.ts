@@ -35,6 +35,11 @@ export class QuestionService {
     return this.db.doc(id).get();
   }
 
+  getQuestionsByAuthor(uid){
+    return this.firestore.collection("questions", ref => 
+    ref.where('author', '==', uid)).get();
+  }
+
   deleteQuestion(question: Question) {
     this.questionDoc = this.firestore.doc(`questions/${question._id}`)
     this.questionDoc.delete();
