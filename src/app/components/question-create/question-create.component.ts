@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Question} from '../../models/question'
-
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from '../../services/auth.service';
-
 @Component({
   selector: 'app-question-create',
   templateUrl: './question-create.component.html',
@@ -11,8 +9,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class QuestionCreateComponent implements OnInit {
 
-  public question: Question = {}
-
+  public question: Question = {responses:false}  
   constructor(private questionService: QuestionService, public auth: AuthService) {}  
 
   ngOnInit() { 
