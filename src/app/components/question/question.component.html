@@ -8,10 +8,10 @@
 <hr/>
 <app-answer-create *ngIf="flag" [questionId]="question._id"></app-answer-create>
 <div *ngIf="responses">
-    <div *ngFor="let response of responses">
+    <div *ngFor="let response of responses"> 
         <div class="card" *ngIf="response.content">
         <h1>{{response.content}}</h1>        
         <p>Autor: {{response.author}}</p>
         </div>
-    </div>
+    </div>    
 </div>

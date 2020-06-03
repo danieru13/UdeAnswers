@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Answer } from '../../models/answer';
-import { AuthService } from '../../services/auth.service';
 import { AnswerService } from '../../services/answer.service';
 
 @Component({
@@ -10,19 +8,18 @@ import { AnswerService } from '../../services/answer.service';
 })
 export class AnswerCreateComponent implements OnInit {
 
-  @Input() questionId: string;
-  public answer: Answer = {}
-  constructor(private auth: AuthService, private answerService: AnswerService) { }
+  @Input() questionId: string;  
+  content : string= "";
+  constructor(private answerService: AnswerService) { }
 
   ngOnInit() {        
   }
   
-  onSubmit(form){
-    
-    this.answerService.addAnswer(this.answer,this.questionId)
-    form.reset();
-    this.answer.content = "";
-    
+  async onSubmit(form){
+
+    this.answerService.addAnswer(this.content,this.questionId);    
+    form.reset();    
+    this.content = "";  
     
    }
 

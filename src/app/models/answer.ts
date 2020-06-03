@@ -1,6 +1,8 @@
 export interface Answer {
     id?: string;
-    content?: string;
-    author?: string;
-    score?: number;
+    content?: {
+        author?: string,
+        content?: string,
+        score?: number;
+    }[]
 }

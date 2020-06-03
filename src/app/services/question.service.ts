@@ -49,9 +49,7 @@ export class QuestionService {
       var id= data.id      
       var u = {
         _id: id
-      }      
-      var a = this.firestore.doc(`questions/${id}`).collection("responses")
-      a.doc(id).set({})      
+      }                 
       this.updateQuestionId(u);
     });    
   }
@@ -64,21 +62,15 @@ export class QuestionService {
     };
 
     return ref.set(data, { merge: true });
-  }
-  public updateQuestion({_id,author,content,responses}:Question){
-    
-    const ref: AngularFirestoreDocument<Question> = this.firestore.doc(`questions/${_id}`)
-    
-    const data = {
-      _id,
-      author,
-      content,
+  }  
+  updateQuestion({ _id, responses}: Question) {
+
+    const ref = this.firestore.doc(`questions/${_id}`);
+    return ref.update({
       responses
-    };
+    })
     
-    return ref.set(data,{merge:true});
-    
-  }
+  } 
   searchQuestion(s: string) {
     if (this.questions === undefined) {
       this.getQuestions().toPromise().then(() => {

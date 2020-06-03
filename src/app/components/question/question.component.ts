@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription} from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router'
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -18,6 +18,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   flag = false;
   sub: Subscription;
   responses=[];
+  
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -42,13 +43,13 @@ export class QuestionComponent implements OnInit, OnDestroy {
       }
       this.getUId();
     });
-
   }
-  getResponses(id){
-    this.answerService.getResponses(id).subscribe(answers=>{
-      this.responses = answers;
+  getResponses(id){        
+    this.answerService.getAnswersByQuestionId(id).subscribe(data=>{      
+      data.forEach(doc=>{
+        this.responses = doc.content;
+      })
     })
-    
   }
 
   ngOnDestroy() {

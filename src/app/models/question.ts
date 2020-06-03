@@ -6,6 +6,6 @@ export class Question{
     public _id?: string,
     public author?: string,
     public content?: string,
-    public responses?: Observable<any>
+    public responses?: boolean
     ){}
 }
