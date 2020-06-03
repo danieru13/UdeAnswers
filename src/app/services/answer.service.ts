@@ -44,16 +44,17 @@ export class AnswerService {
 
   async addAnswer(content: string, qid) {
     try {
-      var author, aux=[];
+      var author, aux=[],uid;
       await this.user$.subscribe((user) => {
         author = user.displayName;
+        uid = user.uid;
       });
       this.questionService.getQuestionById(qid).subscribe((d)=>{
         if(d.data().responses){
           this.query(qid).get().subscribe((data)=>{
             data.forEach((doc)=>{              
               aux =doc.data().content    
-              aux.push({author,content})                  
+              aux.push({author,uid,content})                  
               const ans = {id : doc.id, content: aux}              
               this.updateAnswer(ans)              
             })           
