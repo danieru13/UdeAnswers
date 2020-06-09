@@ -1,4 +1,35 @@
-<nav id="navbar">
+<nav class="navbar navbar-expand-lg navbar-light bg-custom">    
+    <a class="navbar-brand navbar-brand-color" [routerLink]="['/questions']">UdeAnswers</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item " [routerLinkActive]="['active']">            
+          <a class="nav-link" [routerLink]="['/questions']" >Inicio</a>
+        </li>             
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <button class="btn btn-light mr-sm-3" type="submit">Añadir regunta</button>
+        <input class="form-control " (keyup.enter)="search(txtSearch.value)" type="text" id="search" placeholder="Buscar..."
+        #txtSearch>
+        
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0" *ngIf="user$ | async as user; else login">
+            <li class="nav-item mr-sm-0" [routerLinkActive]="['active']">
+                <a id="profile-image" class="nav-link nav-link-ns" [routerLink]="['/profile', user.uid]"><img src="{{user.photoURL}}" alt="{{user.displayName}}"> </a>                
+            </li>        
+            <li class="nav-item mt-1" *ngIf="user">
+                <a class="nav-link logout" [ngStyle]="{'color':'white'}" (click)="authService.signOut()">Cerrar Sesión </a>
+            </li>                   
+        </ul>
+        <ng-template #login>
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item" [routerLinkActive]="['active']">
+                    <a class="nav-link" [routerLink]="['/login']">Login<span class="sr-only">(current)</span></a>
+                </li>  
+            </ul>
+        </ng-template>
+      </div>
+    </div>
+  </nav>
+<!-- <nav id="navbar">
     <div class="container">
         <ul *ngIf="user$ | async as user; else login">
             <li>
@@ -25,4 +56,4 @@
     </div>
     <input class="box" (keyup.enter)="search(txtSearch.value)" type="text" id="search" placeholder="Buscar..."
         #txtSearch />
-</nav>
+</nav> -->

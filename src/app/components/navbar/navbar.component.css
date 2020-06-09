@@ -1,0 +1,19 @@
+.navbar-brand-color{
+    color: white;
+}
+.navbar-brand-color:hover{
+    color: white;
+}
+.logout{
+    color: white;
+    cursor: pointer;
+}
+.logout:hover{
+    color: #fff;
+    cursor: pointer;
+}
+img{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}

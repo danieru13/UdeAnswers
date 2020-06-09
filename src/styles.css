@@ -12,8 +12,36 @@ body{
 	line-height:1.6em;
 	margin:0;
 }
+.navbar{
+	height: 60px;
+}
 
-#navbar{
+.bg-custom{
+	background-color:  #046424;   
+}
+.navbar-light .nav-item.active .nav-link,
+.navbar-light .nav-item:focus .nav-link,
+.navbar-light .nav-item:hover .nav-link {
+        color: #ffffff;
+}
+.bg-custom .navbar-brand,
+.navbar-custom .navbar-text {	
+    color: rgba(255,255,255,.8);
+}
+/* change the link color */
+.bg-custom .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+}
+/* change the color of active or hovered links */
+.bg-custom .nav-item.active .nav-link,
+.bg-custom .nav-item:focus ,
+.bg-custom .nav-item:hover {	
+	border-bottom:2px solid #fff;	
+}
+.bg-custom .navbar-nav .nav-link {
+    color: black;    
+}
+/* #navbar{
 	background-color:  #046424;   
 	color:#fff;    
     display: block;    
@@ -23,7 +51,7 @@ body{
     display: block;
     padding: 0;      
     list-style: none;
-}
+}	
 
 #navbar li{
     display: inline-block;    
@@ -48,7 +76,7 @@ body{
     margin-top: -41px;
     margin-right: 5px;
     padding: 2px;
-  }
+  } */
 .container{
 	display: flex;
 	flex-direction: column;
