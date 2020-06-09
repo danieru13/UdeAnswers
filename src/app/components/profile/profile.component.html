@@ -6,6 +6,10 @@
             <p>{{user.email}}</p>
             <hr>
         </div>
+
+        <div>
+            <app-question-list-by-author [uid] = "prof_uid"></app-question-list-by-author>
+        </div>
     
         <div *ngIf="flag">
             <button>Responder preguntas</button>
