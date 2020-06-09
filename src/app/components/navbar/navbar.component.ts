@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
-import { auth } from 'firebase/app';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { QuestionCreateComponent } from '../question-create/question-create.component';
 
 
 @Component({
@@ -15,11 +16,11 @@ export class NavbarComponent implements OnInit {
   uid: string = '';
   public user$: Observable<any> = this.authService.afAuth.user;
   constructor(private router: Router,
-              public authService: AuthService
+              public authService: AuthService,
+              private modalService: NgbModal
   ) { }
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {    
   }
   search(query: string) {
     if (query.length < 1) {
@@ -27,4 +28,7 @@ export class NavbarComponent implements OnInit {
     }
     this.router.navigate(['/search', query]);
   }  
+  addQuestion(){
+    this.modalService.open(QuestionCreateComponent);  
+  }
 }

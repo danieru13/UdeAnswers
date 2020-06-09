@@ -1,3 +1,16 @@
-.question-list-component{
-    padding-left: 20px;
+#user-information{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
+.card-header{
+    display: flex;
+}
+.pregunta{
+    cursor: pointer;
+}
+.pregunta:hover{
+    box-shadow: 2px 8px 15px rgba(0, 0, 0, .15);
+    transform: translate3D(0, -2px, 0);
+    background: rgba(0, 0, 0, 0.004);
 }

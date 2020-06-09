@@ -1,16 +1,26 @@
-<app-question-create></app-question-create> 
+<div class="card mt-3 mb-2 pregunta" (click)="addQuestion()">
+    <div class="card-header" *ngIf="user$ | async as user;">
+      <img id="user-information" class="mr-sm-2" src="{{user.photoURL}}" alt="{{user.displayName}}">
+      <p class="my-0">{{user.displayName}}</p> 
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">¿Tienes alguna pregunta?</h5>   
+      <p class="card-text">Compartela con todos!.</p>      
+    </div>    
+  </div>  
 <div class="question-component">
     <div *ngIf="questions.length >0; else sinitems">
     </div>
     <div>
         <ul *ngFor="let question of questions">
             <div class="card">
-                <li>
-                    <h1>
-                        <a [routerLink]="['/question', question._id]">{{question.content}}</a>
-                    </h1>
-                </li>
-                <a *ngIf="isAuthor(question)" (click)="deleteQuestion(question)" class="button3">Borrar</a>  
+                <div class="card-body">                    
+                    <a class="card-title" [routerLink]="['/question', question._id]">{{question.content}}</a>
+                    <p class="card-text"></p>
+                    <a [routerLink]="['/question', question._id]" class="btn btn-success">Responder</a>                    
+                    <button *ngIf="isAuthor(question)" (click)="deleteQuestion(question)"  type="button" class="btn btn-danger">Borrar</button>
+                  </div>                
+                
             </div>      
         </ul>        
     </div>    

@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Question} from '../../models/question'
+import { Question } from '../../models/question';
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from '../../services/auth.service';
+import { Observable } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-question-create',
   templateUrl: './question-create.component.html',
@@ -10,10 +14,15 @@ import { AuthService } from '../../services/auth.service';
 export class QuestionCreateComponent implements OnInit {
 
   public question: Question = {responses:false}  
-  constructor(private questionService: QuestionService, public auth: AuthService) {}  
+  public user$: Observable<any> = this.auth.afAuth.user;
+  public questionForm: FormGroup;
+  constructor(private questionService: QuestionService, public auth: AuthService, private formBuilder: FormBuilder, public activeModal: NgbActiveModal ) {}  
 
   ngOnInit() { 
-    this.getUId();    
+    this.getUId();
+    this.questionForm = this.formBuilder.group({      
+      content:["", Validators.required]
+    })    
   }
 
   async getUId() {
@@ -23,11 +32,14 @@ export class QuestionCreateComponent implements OnInit {
      });
   }
   
-  onSubmit(form){
-    
-    this.questionService.addQuestion(this.question);
-    form.reset();
+  onSubmit(){
+    if(this.questionForm.invalid){
+      return;
+    }
+    this.question.content = this.questionForm.value.content;
+    this.questionService.addQuestion(this.question).then(()=>this.activeModal.dismiss())
     this.question.content = "";
    }
+   
 
 }

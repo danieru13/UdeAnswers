@@ -1,7 +1,19 @@
-<div class="card">
-    <form #questionForm = "ngForm" (ngSubmit)="onSubmit(questionForm)">
-        <h2>Ingrese pregunta</h2>                        
-        <input type="text" name="content" #content="ngModel" [(ngModel)]="question.content" required>            
-        <input type="submit" value="Enviar" [disabled]="!questionForm.form.valid">
-    </form>    
-</div>  
+<div class="modal-header">
+    <h4 class="modal-title">Escribe una pregunta</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="content">Contenido de la pregunta*</label>
+        <input type="text" id="content" class="form-control" formControlName="content" />
+        <span style="color:Red;" *ngIf="questionForm.controls['content'].touched && questionForm.controls['content'].errors?.required">Debe escribir la pregunta.</span>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click')">Cancelar</button>
+    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="questionForm.invalid">Enviar</button>
+  </div>

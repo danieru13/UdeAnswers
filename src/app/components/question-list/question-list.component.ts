@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Observable } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { QuestionCreateComponent } from '../question-create/question-create.component';
 @Component({
   selector: 'app-question-list',
   templateUrl: './question-list.component.html',
@@ -12,8 +15,9 @@ export class QuestionListComponent implements OnInit {
   questions=[];
   uid = '';
   it: any;
+  public user$: Observable<any> = this.auth.afAuth.user;
 
-  constructor(private QuestionService: QuestionService, private auth: AuthService) { }
+  constructor(private QuestionService: QuestionService, private auth: AuthService, private modalService: NgbModal) { }
 
   ngOnInit(){
     this.QuestionService.getQuestions().subscribe(questions =>{      
@@ -41,5 +45,10 @@ export class QuestionListComponent implements OnInit {
     this.QuestionService.deleteQuestion(question);
     }
   }
+  addQuestion(){
+    this.modalService.open(QuestionCreateComponent);  
+  }
+  
+  
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output } from '@angular/core';
 import { Subscription} from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router'
 import { QuestionService } from '../../services/question.service';
@@ -13,11 +13,13 @@ import { AnswerService } from '../../services/answer.service';
 })
 export class QuestionComponent implements OnInit, OnDestroy {
 
+  
   question: any = {};
   uid: string = '';
   flag = false;
   sub: Subscription;
   responses=[];
+  
   
 
   constructor(private route: ActivatedRoute,
