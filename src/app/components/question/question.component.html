@@ -1,17 +1,44 @@
 <div class="card">
-    <h1>{{question.content}}</h1>
-    <a *ngIf="!isAuthor(question)" (click)="answer()" class="button3">Responder</a>
-    <a *ngIf="isAuthor(question)" (click)="deleteQuestion(question)" class="button3">Borrar</a>
+  <h1>{{ question.content }}</h1>
+  <a *ngIf="!isAuthor(question)" (click)="answer()" class="button3"
+    >Responder</a
+  >
+  <a
+    *ngIf="isAuthor(question)"
+    (click)="deleteQuestion(question)"
+    class="button3"
+    >Borrar</a
+  >
 </div>
-<hr/>
-<br>
-<hr/>
+<hr />
+<br />
+<hr />
 <app-answer-create *ngIf="flag" [questionId]="question._id"></app-answer-create>
-<div *ngIf="responses">
-    <div *ngFor="let response of responses"> 
-        <div class="card" *ngIf="response.content">
-        <h1>{{response.content}}</h1>        
-        <p>Autor: {{response.author}}</p>
+
+<div class="card">
+  <div class="card-body">
+    <div *ngIf="responses">
+      <div *ngFor="let response of responses">
+        <div class="card mt-2" *ngIf="response.content">
+          <div >
+            <img
+              id="img-author"
+              class="mt-1 ml-2"
+              src="{{ response.photoURL }}"
+              alt="{{ response.author }}"
+              width="30px"
+            />
+            <p class="ml-2" [ngStyle]="{ display: 'inline' }">
+              {{ response.author }}
+            </p>
+          </div>
+          <p class="ml-2">{{ response.content }}</p>
+
+          <button type="button" (click)="answerAuthor(response.uid)">
+            aceptar
+          </button>
         </div>
-    </div>    
+      </div>
+    </div>
+  </div>
 </div>

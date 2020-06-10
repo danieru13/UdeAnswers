@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { AnswerService } from '../../services/answer.service';
+import { User } from '../../models/user.model';
+import { DocumentReference } from "@angular/fire/firestore";
 
 
 @Component({
@@ -19,8 +21,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
   flag = false;
   sub: Subscription;
   responses=[];
-  
-  
+  author: User ;
+  ref: DocumentReference
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -49,10 +51,11 @@ export class QuestionComponent implements OnInit, OnDestroy {
   getResponses(id){        
     this.answerService.getAnswersByQuestionId(id).subscribe(data=>{      
       data.forEach(doc=>{
-        this.responses = doc.content;
+        this.responses = doc.content;        
       })
     })
   }
+
 
   ngOnDestroy() {
     this.sub.unsubscribe();
@@ -83,6 +86,11 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
   answer(){
     this.flag= true;
+  }
+  answerAuthor(id){       
+    this.auth.getUserById(id).get().subscribe((doc)=>{
+      this.author = {uid: doc.data().uid, displayName: doc.data().displayName, email:doc.data().email, photoURL: doc.data().photoURL}
+    })      
   }
 
 }

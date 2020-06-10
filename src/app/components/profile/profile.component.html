@@ -1,20 +1,75 @@
-<div>
-    <div *ngIf="user else loading">
-        <div>
-            <img src="{{user.photoURL}}" alt="{{user.displayName}}" width="250px">
-            <p>{{user.displayName}}</p>
-            <p>{{user.email}}</p>
-            <hr>
-        </div>
-    
-        <div *ngIf="flag">
-            <button>Responder preguntas</button>
-            <button>Ver mis preguntas</button>
-            <button>Favoritos</button>
-        </div>        
+<div class="card text-center mt-4" *ngIf="user; else loading">
+  <div class="card-header">
+    Información de perfil
+  </div>
+  <div class="card-body">
+    <div class="">
+      <img
+        id="user-photo"
+        src="{{ user.photoURL }}"
+        alt="{{ user.displayName }}"
+      />
+      <p>{{ user.displayName }}</p>
+      <p>{{ user.email }}</p>
     </div>
-    <ng-template #loading>
-        <span>Cargando...</span>
-    </ng-template>
-    
+  </div>
 </div>
+<hr />
+<div >
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Mis preguntas</a>
+      <ng-template ngbNavContent>
+        <p>
+          Raw denim you probably haven't heard of them jean shorts Austin.
+          Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
+          cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
+          butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi,
+          qui irure terry richardson ex squid. Aliquip placeat salvia cillum
+          iphone. Seitan aliquip quis cardigan american apparel, butcher
+          voluptate nisi qui.
+        </p>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>Mis respuestas</a>
+      <ng-template ngbNavContent>
+        <p>
+          Exercitation +1 labore velit, blog sartorial PBR leggings next level
+          wes anderson artisan four loko farm-to-table craft beer twee. Qui
+          photo booth letterpress, commodo enim craft beer mlkshk aliquip jean
+          shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda
+          labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia
+          yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio
+          cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY
+          ethical culpa terry richardson biodiesel. Art party scenester
+          stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed
+          echo park.
+        </p>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <a ngbNavLink>Mis Favoritos</a>
+      <ng-template ngbNavContent>
+        <p>
+          Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget
+          sodales nibh elit id diam. Nulla facilisi. Donec egestas ligula vitae
+          odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu,
+          congue et odio. Duis pharetra et nisl at faucibus. Quisque luctus
+          pulvinar arcu, et molestie lectus ultrices et. Sed diam urna, egestas
+          ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu.
+          Vivamus faucibus nisl enim, nec tristique ipsum euismod facilisis.
+          Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque
+          penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          Mauris aliquet odio ac lorem aliquet ultricies in eget neque.
+          Phasellus nec tortor vel tellus pulvinar feugiat.
+        </p>
+      </ng-template>
+    </li>
+  </ul>
+</div>
+<ng-template #loading>
+    <span>Cargando...</span>
+  </ng-template>
+
+<div [ngbNavOutlet]="nav" class="mt-2"></div>

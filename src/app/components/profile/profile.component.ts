@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
+  active = 1;
   uid: String = '';
   user: any;
   flag = true;

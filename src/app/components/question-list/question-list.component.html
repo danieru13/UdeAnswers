@@ -17,7 +17,7 @@
                 <div class="card-body">                    
                     <a class="card-title" [routerLink]="['/question', question._id]">{{question.content}}</a>
                     <p class="card-text"></p>
-                    <a [routerLink]="['/question', question._id]" class="btn btn-success">Responder</a>                    
+                    <a *ngIf="!isAuthor(question)" [routerLink]="['/question', question._id]" class="btn btn-success">Responder</a>                    
                     <button *ngIf="isAuthor(question)" (click)="deleteQuestion(question)"  type="button" class="btn btn-danger">Borrar</button>
                   </div>                
                 
