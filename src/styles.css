@@ -42,6 +42,11 @@ body{
 .bg-custom .navbar-nav .nav-link {
     color: black;    
 }
+.img-perfil{
+	width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
 /* #navbar{
 	background-color:  #046424;   
 	color:#fff;    
@@ -98,16 +103,16 @@ body{
 	transform: translate3D(0, -2px, 0);
   } */
 
-  h1 {
+  /* h1 {
 	text-align: left;
 	text-transform: capitalize;
 	padding: 1.5rem 2.5rem;
 	margin: 0 0 2rem 0;
 	font-size: 1.5rem;
 	color: black;
-  }
+  } */
 
-  a.button3{
+  /* a.button3{
 	display:inline-block;
 	padding:0.3em 1.2em;
 	margin:0 0.3em 0.3em 0;
@@ -123,4 +128,4 @@ body{
 	}
 	a.button3:hover{
 	background-color:#4095c6;
-}
+} */

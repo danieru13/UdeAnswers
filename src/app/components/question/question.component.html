@@ -1,26 +1,32 @@
-<div class="card">
-  <h1>{{ question.content }}</h1>
-  <a *ngIf="!isAuthor(question)" (click)="answer()" class="button3"
-    >Responder</a
-  >
-  <a
-    *ngIf="isAuthor(question)"
-    (click)="deleteQuestion(question)"
-    class="button3"
-    >Borrar</a
-  >
-</div>
-<hr />
-<br />
-<hr />
-<app-answer-create *ngIf="flag" [questionId]="question._id"></app-answer-create>
-
-<div class="card">
+<div class="card mt-3 mb-2">
+  <div class="card-header" [ngStyle]="{ display: 'flex' }">
+    <img class="img-perfil mr-sm-2" src="{{ imgAuthor }}" alt="..." />
+    <p class="my-0">{{ author }}</p>
+  </div>
   <div class="card-body">
+    <h3 class="mb-3">{{ question.content }}</h3>
+    <button *ngIf="!isAuthor(question)" (click)="answer()" class="btn btn-success"
+      >Responder</button>
+    <button
+      *ngIf="isAuthor(question)"
+      (click)="deleteQuestion(question)"
+      class="btn btn-danger"
+      >Borrar</button
+    >
+  </div>
+</div>
+Respuestas: {{cont}}
+<hr />
+<app-answer-create *ngIf="flag; else br" [questionId]="question._id"></app-answer-create>
+<ng-template #br>
+  <br/>
+</ng-template>
+<hr />
+<div class="card">  
     <div *ngIf="responses">
-      <div *ngFor="let response of responses">
-        <div class="card mt-2" *ngIf="response.content">
-          <div >
+      <div *ngFor="let response of responses; let i = index">
+        <div class="card-header" *ngIf="response.content">
+          <div>
             <img
               id="img-author"
               class="mt-1 ml-2"
@@ -31,14 +37,12 @@
             <p class="ml-2" [ngStyle]="{ display: 'inline' }">
               {{ response.author }}
             </p>
-          </div>
-          <p class="ml-2">{{ response.content }}</p>
-
-          <button type="button" (click)="answerAuthor(response.uid)">
-            aceptar
-          </button>
+          </div>            
         </div>
+        <div class="card-body">
+          <p class="ml-2">{{ response.content }}</p>
+          <button *ngIf="isAnswerAuthor(response.uid)" (click)="deleteAnswer(aid,i)" class="btn btn-danger">Borrar</button>   
+        <button *ngIf="isAnswerAuthor(response.uid)" class="btn btn-primary">Editar</button>         </div> 
       </div>
-    </div>
-  </div>
+    </div>  
 </div>

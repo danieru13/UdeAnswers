@@ -1,11 +1,11 @@
 <div class="card mt-3 mb-2 pregunta" (click)="addQuestion()">
     <div class="card-header" *ngIf="user$ | async as user;">
-      <img id="user-information" class="mr-sm-2" src="{{user.photoURL}}" alt="{{user.displayName}}">
+      <img class="img-perfil mr-sm-2" src="{{user.photoURL}}" alt="{{user.displayName}}">
       <p class="my-0">{{user.displayName}}</p> 
     </div>
     <div class="card-body">
       <h5 class="card-title">¿Tienes alguna pregunta?</h5>   
-      <p class="card-text">Compartela con todos!.</p>      
+      <p class="card-text">Compártela con todos!.</p>      
     </div>    
   </div>  
 <div class="question-component">
