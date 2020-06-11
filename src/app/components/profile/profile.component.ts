@@ -11,8 +11,10 @@ export class ProfileComponent implements OnInit {
 
   active = 1;
   uid: String = '';
+  prof_uid: String = '';
   user: any;
   flag = true;
+
   constructor(private route: ActivatedRoute,
     private auth: AuthService
   ) { }
@@ -24,6 +26,7 @@ export class ProfileComponent implements OnInit {
     await this.auth.user$.subscribe(data => {
       this.route.params.subscribe(params => {
         const uid = params['uid'];
+        this.prof_uid = uid;
         if (uid) {
           if (data) {
             this.uid = data.uid;
@@ -47,5 +50,4 @@ export class ProfileComponent implements OnInit {
       });
     });
   }
-
 }
