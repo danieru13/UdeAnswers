@@ -1,4 +1,4 @@
-<div class="question-component">
+<!-- <div class="question-component">
     <div *ngIf="_questions.result.length >0; else sinitems">
     </div>
     <div>
@@ -12,6 +12,28 @@
             </div>
         </ul>
     </div>
+    <ng-template #sinitems>
+        <span>No hay datos</span>
+    </ng-template>
+</div> -->
+
+
+<div class="question-component">
+    <div *ngIf="_questions.result.length >0; else sinitems">
+    </div>
+    <div>
+        <ul *ngFor="let question of _questions.result">
+            <div class="card">
+                <div class="card-body">                    
+                    <a class="card-title" [routerLink]="['/question', question._id]">{{question.content}}</a>
+                    <p class="card-text"></p>
+                    <a [routerLink]="['/question', question._id]" class="btn btn-success">Responder</a>                    
+                    <button *ngIf="isAuthor(question)" (click)="deleteQuestion(question)"  type="button" class="btn btn-danger">Borrar</button>
+                  </div>                
+                
+            </div>      
+        </ul>        
+    </div>    
     <ng-template #sinitems>
         <span>No hay datos</span>
     </ng-template>

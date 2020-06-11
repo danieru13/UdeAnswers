@@ -42,29 +42,36 @@ export class AnswerService {
     return this.answers;
   }
 
-  async addAnswer(content: string, qid) {
+  async addAnswer(content: string, questionid) {
     try {
-      var author, aux=[],uid;
-      await this.user$.subscribe((user) => {
-        author = user.displayName;
-        uid = user.uid;
+      var aux=[],uid;
+      await this.user$.subscribe((user) => {        
+        uid = user.uid;        
       });
-      this.questionService.getQuestionById(qid).subscribe((d)=>{
+      
+      this.questionService.getQuestionById(questionid).subscribe((d)=>{                
         if(d.data().responses){
-          this.query(qid).get().subscribe((data)=>{
-            data.forEach((doc)=>{              
-              aux =doc.data().content    
-              aux.push({author,uid,content})                  
+          this.query(questionid).get().subscribe((data)=>{            
+            data.forEach((doc)=>{                                          
+              aux =doc.data().content                  
+              aux.push({uid,content})                  
               const ans = {id : doc.id, content: aux}              
-              this.updateAnswer(ans)              
+              this.updateAnswers(ans)              
             })           
           })                   
           
         }else{
-          var answer: Answer = {id: qid,content: []};          
-          answer.content.push({ author, content });
-          this.answersCollection.add(answer)            
-          this.questionService.updateQuestion({_id:qid,responses:true});
+          var answer: Answer = {qid: questionid,content: []};          
+          answer.content.push({ uid, content });
+          this.answersCollection.add(answer).then(doc=>{
+            var id = doc.id
+            var data={
+              id : id
+            }
+            this.updateAnswerId(data)
+            this.questionService.updateQuestion({_id:questionid,responses:true});
+          })         
+          
         }
       })
     } catch (error) {
@@ -79,29 +86,37 @@ export class AnswerService {
     };
     return ref.set(data, { merge: true });
   }
-  updateAnswer({id,content}:Answer){
+  updateAnswers({id,content}:Answer){
     const ref: AngularFirestoreDocument<Answer> = this.afs.doc(`answers/${id}`);
     const data = {      
       content
     };
     return ref.set(data, { merge: true });
   }
-  
+  deleteAnswer(id, obj){    
+    return this.afs.collection(this.collectionName).doc(id).update(obj)            
+  }
+  deleteAnswerDocument(qid, id){    
+    return this.afs.collection(this.collectionName).doc(id).delete().then(()=>{
+      this.questionService.updateQuestion({_id:qid, responses: false});
+    });
+  }
   getAnswerById(id) {
     return this.db.doc(id).get();
   }
-  private query(qid){
-    return this.afs.collection("answers",ref=> ref.where('id','==',qid));
+  private query(questionid){
+    return this.afs.collection("answers",ref=> ref.where('qid','==',questionid));
   }
   getAnswersByQuestionId(qid){
-    var collection= this.query(qid);  
+    var collection= this.query(qid);    
     var answers: Observable<Answer[]>;    
     answers = collection.snapshotChanges().pipe(map(actions=>{
       return actions.map((a)=>{
-        const data = a.payload.doc.data() as Answer;
+        const data = a.payload.doc.data() as Answer;                  
         return data;
       })
     }))
+    
     return answers;
   }
 }

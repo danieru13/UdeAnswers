@@ -50,7 +50,7 @@ export class QuestionService {
  
   addQuestion(question: Question) {
     
-    this.questionsCollection.add(question).then(data=>{
+   return this.questionsCollection.add(question).then(data=>{
       var id= data.id      
       var u = {
         _id: id

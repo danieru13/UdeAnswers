@@ -1,9 +1,15 @@
-<h1>Login</h1>
-<div *ngIf="auth.user$ | async as user; else login">
-  {{ user | json }}
-  <hr>
-  <button (click)="auth.signOut()">Sign Out</button>
+<div class="mb-3 mt-5 text-center" style="width: 70rem;">
+  <h5 class="card-title">Bienvenidos</h5>
+  <img src="http://www.udea.edu.co/wps/wcm/connect/udea/ec2cedfa-9646-4397-9e09-ecc7548c996c/1/Logos%C3%ADmbolo+Universidad+de+Antioquia+vertical+verde2.png?MOD=AJPERES" class="card-img-top" alt="...">
+  <div class="card-body" *ngIf="auth.user$ | async as user; else login">
+    <button class="btn btn-dark" (click)="auth.signOut()">Cerrar Sesión</button>  
+  </div>
 </div>
-<ng-template #login>
-  <button (click)="auth.login()">Login</button>
+
+<ng-template #login>   
+  <div class="card-body">
+    <button class="btn btn-success" (click)="auth.login()">Iniciar Sesión</button>
+  </div> 
+  
 </ng-template>
+
