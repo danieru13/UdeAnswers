@@ -1,11 +1,9 @@
 <div>
     <ul *ngFor="let question of questions">
         <div class="card">
-            <li>
-                <h1>
-                    <a>{{question.content}}</a>
-                </h1>
-            </li>
+            <div class="card-body">
+                <a class="card-title" [routerLink]="['/question', question._id]">{{question.content}}</a>
+            </div>
         </div>      
     </ul>        
 </div>    
