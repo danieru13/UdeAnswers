@@ -7,7 +7,7 @@
     />
     <p class="my-0">{{ user.displayName }}</p>
   </div>
-  <form #answerForm="ngForm" (ngSubmit)="onSubmit(answerForm)">
+  <form #answerForm="ngForm" (ngSubmit)="onSubmit(answerForm, 'Respuesta enviada correctamente')">
     <textarea
       name="response"
       #response="ngModel"

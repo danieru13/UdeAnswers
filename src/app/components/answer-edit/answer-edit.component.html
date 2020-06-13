@@ -5,7 +5,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="answerForm" (ngSubmit)="onEdit()">
+    <form [formGroup]="answerForm">
       <div class="form-group">
         <label for="content">Escribe tu respuesta*</label>       
         <textarea id="content" class="form-control" formControlName="content" ></textarea>
@@ -15,5 +15,5 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click')">Cancelar</button>
-    <button class="btn btn-primary" (click)="onEdit()" [disabled]="answerForm.invalid">Enviar</button>
+    <button class="btn btn-primary" (click)="onEdit('Respuesta editada correctamente')" [disabled]="answerForm.invalid">Enviar</button>
   </div>
