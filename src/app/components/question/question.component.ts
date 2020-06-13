@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { AnswerService } from '../../services/answer.service';
-import { User } from '../../models/user.model';
-import { DocumentReference } from '@angular/fire/firestore';
+import { AnswerService } from '../../services/answer.service';  
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AnswerEditComponent } from '../answer-edit/answer-edit.component';
 
 @Component({
   selector: 'app-question',
@@ -19,18 +19,18 @@ export class QuestionComponent implements OnInit, OnDestroy {
   sub: Subscription;
   responses = [];
   public author = '';
-  public imgAuthor = '';
-  ref: DocumentReference;
+  public imgAuthor = '';  
   public cont = 0;
   public qid = '';
   public aid = '';
-
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private questionService: QuestionService,
     private auth: AuthService,
-    private answerService: AnswerService
+    public answerService: AnswerService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -77,8 +77,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     try {
       this.responses.splice(i, 1);
       var obj = { content: this.responses };
-      await this.answerService.deleteAnswer(id, obj);
-      console.log(this.cont);
+      await this.answerService.updateAnswer(id, obj);      
       if (this.cont == 0) {
         this.answerService.deleteAnswerDocument(this.qid, id);
       }
@@ -126,8 +125,15 @@ export class QuestionComponent implements OnInit, OnDestroy {
       this.gotoList();
     }
   }
-
   answer() {
-    this.flag = true;
+    this.answerService.showAnswerCreate = true      
+  }
+  editAnswer(id){    
+    const modal =this.modalService.open(AnswerEditComponent);
+    modal.result;    
+    modal.componentInstance.answer = this.responses[id]
+    modal.componentInstance.responseId = id
+    modal.componentInstance.aid = this.aid 
+    modal.componentInstance.responses = this.responses
   }
 }

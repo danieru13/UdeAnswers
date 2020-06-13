@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionCreateComponent } from '../question-create/question-create.component';
+
 @Component({
   selector: 'app-question-list',
   templateUrl: './question-list.component.html',
@@ -48,6 +49,7 @@ export class QuestionListComponent implements OnInit {
   addQuestion(){
     this.modalService.open(QuestionCreateComponent);  
   }
+  
   
   
 

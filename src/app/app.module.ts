@@ -18,6 +18,8 @@ import { QuestionComponent } from './components/question/question.component';
 import { AnswerCreateComponent } from './components/answer-create/answer-create.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { QuestionListByAuthorComponent } from './components/question-list-by-author/question-list-by-author.component';
+import { AnswerEditComponent } from './components/answer-edit/answer-edit.component';
+
 
 
 @NgModule({
@@ -32,6 +34,7 @@ import { QuestionListByAuthorComponent } from './components/question-list-by-aut
     AnswerCreateComponent,
     ProfileComponent,
     QuestionListByAuthorComponent,
+    AnswerEditComponent,
   ],
   imports: [
     BrowserModule,

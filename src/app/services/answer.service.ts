@@ -20,8 +20,8 @@ export class AnswerService {
   private db = this.afs.collection(this.collectionName);
   public response: Observable<Answer[]>;
   public user$: Observable<any> = this.auth.afAuth.user;
-  public aid = "";
-
+  public aid = "";  
+  public showAnswerCreate = false;
   constructor(
     private afs: AngularFirestore,
     private questionService: QuestionService,
@@ -56,7 +56,7 @@ export class AnswerService {
               aux =doc.data().content                  
               aux.push({uid,content})                  
               const ans = {id : doc.id, content: aux}              
-              this.updateAnswers(ans)              
+              this.updateAnswer(ans.id,ans)              
             })           
           })                   
           
@@ -85,15 +85,8 @@ export class AnswerService {
       id,
     };
     return ref.set(data, { merge: true });
-  }
-  updateAnswers({id,content}:Answer){
-    const ref: AngularFirestoreDocument<Answer> = this.afs.doc(`answers/${id}`);
-    const data = {      
-      content
-    };
-    return ref.set(data, { merge: true });
-  }
-  deleteAnswer(id, obj){    
+  }  
+  updateAnswer(id, obj){    
     return this.afs.collection(this.collectionName).doc(id).update(obj)            
   }
   deleteAnswerDocument(qid, id){    
