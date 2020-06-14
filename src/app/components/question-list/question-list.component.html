@@ -15,8 +15,9 @@
 <div class="question-component">
   <div *ngIf="questions.length > 0; else sinitems"></div>
   <div>
-    <ul *ngFor="let question of questions; let i = index">
-      <div class="card preguntas">
+    <ul *ngFor="let question of questions; let i = index">      
+      <div class="card preguntas" >
+        <a id="redirect" [routerLink]="['/question', question._id]"></a>
         <div class="card-body">
           <a class="card-title" [routerLink]="['/question', question._id]">{{
             question.content
@@ -33,7 +34,7 @@
               *ngIf="isAuthor(question)"
               (click)="showAlert(i)"
               type="button"
-              class="btn btn-danger"
+              class="btn btn-danger"                            
             >
               Borrar
             </button>
@@ -45,7 +46,7 @@
               Está seguro que desea eliminar la pregunta?
               <button
                 class="btn btn-secondary"
-                (click)="deleteQuestion(question)"
+                (click)="deleteQuestion(question, 'Pregunta eliminada correctamente')"
               >
                 Si
               </button>
@@ -56,6 +57,7 @@
           </div>
         </div>
       </div>
+      
     </ul>
   </div>
   <ng-template #sinitems>

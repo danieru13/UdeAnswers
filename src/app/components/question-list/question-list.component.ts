@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
@@ -7,25 +6,28 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionCreateComponent } from '../question-create/question-create.component';
 import { ToastService } from '../../services/toast/toast.service';
 
-
 @Component({
   selector: 'app-question-list',
   templateUrl: './question-list.component.html',
-  styleUrls: ['./question-list.component.css']
+  styleUrls: ['./question-list.component.css'],
 })
 export class QuestionListComponent implements OnInit {
-
-  questions=[];
+  questions = [];
   uid = '';
   it: any;
   deleteMode = false;
-  position :number;
+  position: number;
   public user$: Observable<any> = this.auth.afAuth.user;
 
-  constructor(private QuestionService: QuestionService, private auth: AuthService, private modalService: NgbModal, private toastService: ToastService) { }
+  constructor(
+    private QuestionService: QuestionService,
+    private auth: AuthService,
+    private modalService: NgbModal,
+    private toastService: ToastService
+  ) {}
 
-  ngOnInit(){
-    this.QuestionService.getQuestions().subscribe(questions =>{      
+  ngOnInit() {
+    this.QuestionService.getQuestions().subscribe((questions) => {
       this.questions = questions;
     });
 
@@ -33,36 +35,34 @@ export class QuestionListComponent implements OnInit {
   }
 
   async getUId() {
-    await this.auth.user$.subscribe( data => {
+    await this.auth.user$.subscribe((data) => {
       this.uid = data.uid;
       return this.uid;
-     });
+    });
   }
 
-  isAuthor(question){
+  isAuthor(question) {
     return this.uid === question.author;
   }
 
-  deleteQuestion(question){
-    if(!this.isAuthor(question)){
-      alert("Denied")
-    }else{
-    this.QuestionService.deleteQuestion(question);
-    this.deleteMode = false;
+  async deleteQuestion(question, msg) {
+    try {
+      if (!this.isAuthor(question)) {
+        alert('Denied');
+      } else {
+        await this.QuestionService.deleteQuestion(question);
+        this.deleteMode = false;
+        this.toastService.showSuccess(msg);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
-  addQuestion(){
-    this.modalService.open(QuestionCreateComponent);  
+  addQuestion() {
+    this.modalService.open(QuestionCreateComponent);
   }
-  showStandard() {
-    this.toastService.show('I am a standard toast', {
-      delay: 2000,
-      autohide: true
-    });
-  }  
-  showAlert(i){
-    this.deleteMode = true
+  showAlert(i) {
+    this.deleteMode = true;
     this.position = i;
   }
-
 }

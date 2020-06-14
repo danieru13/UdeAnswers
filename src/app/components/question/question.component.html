@@ -5,46 +5,96 @@
   </div>
   <div class="card-body">
     <h3 class="mb-3">{{ question.content }}</h3>
-    <button *ngIf="!isAuthor(question)" (click)="answer()" class="btn btn-success"
-    >Responder</button>
     <button
-      *ngIf="isAuthor(question)"
-      (click)="deleteQuestion(question)"
-      class="btn btn-danger"
-      >Borrar</button
-    >     
+      *ngIf="!isAuthor(question)"
+      (click)="answer()"
+      class="btn btn-success"
+    >
+      Responder
+    </button>
+    <div class="actions">
+      <button
+        *ngIf="isAuthor(question)"
+        (click)="deleteQuestionMode = true"
+        class="btn btn-danger"
+      >
+        Borrar
+      </button>
+      <div
+        *ngIf="deleteQuestionMode"
+        class="alert alert-danger mt-2"
+        role="alert"
+      >
+        Está seguro que desea eliminar la pregunta?
+        <button class="btn btn-secondary" (click)="deleteQuestion(question,'Pregunta eliminada correctamente')">
+          Si
+        </button>
+        <button class="btn btn-secondary" (click)="deleteQuestionMode = false">
+          No
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 <hr />
-    <app-answer-create *ngIf="answerService.showAnswerCreate; else br" [questionId]="question._id"></app-answer-create>
+<app-answer-create
+  *ngIf="answerService.showAnswerCreate; else br"
+  [questionId]="question._id"
+></app-answer-create>
 
 <ng-template #br>
-  <br/>
+  <br />
 </ng-template>
 <hr />
-<p>Respuestas: {{cont}}</p>
-<div class="card">  
-    <div *ngIf="responses">
-      <div *ngFor="let response of responses; let i = index">
-        <div class="card-header" *ngIf="response.content">
-          <div>
-            <img
-              id="img-author"
-              class="mt-1 ml-2"
-              src="{{ response.photoURL }}"
-              alt="{{ response.author }}"
-              width="30px"
-            />
-            <p class="ml-2" [ngStyle]="{ display: 'inline' }">
-              {{ response.author }}
-            </p>
-          </div>            
-        </div>
-        <div class="card-body">
-          <p class="ml-2">{{ response.content }}</p>
-          <button *ngIf="isAnswerAuthor(response.uid)" (click)="deleteAnswer(aid,i)" class="btn btn-danger">Borrar</button>   
-        <button *ngIf="isAnswerAuthor(response.uid)" class="btn btn-primary" (click)="editAnswer(i)">Editar</button>        
-       </div>      
+<p>Respuestas: {{ cont }}</p>
+
+<div *ngIf="responses">
+  <div class="card mb-3" *ngFor="let response of responses; let i = index">
+    <div class="card-header" *ngIf="response.content">
+      <div>
+        <img
+          id="img-author"
+          class="mt-1 ml-2"
+          src="{{ response.photoURL }}"
+          alt="{{ response.author }}"
+          width="30px"
+        />
+        <p class="ml-2" [ngStyle]="{ display: 'inline' }">
+          {{ response.author }}
+        </p>
       </div>
-    </div>  
+    </div>
+    <div class="card-body">
+      <p class="ml-2">{{ response.content }}</p>
+      <div>
+        <button
+          *ngIf="isAnswerAuthor(response.uid)"
+          (click)="showAlert(i)"
+          class="btn btn-danger mr-2"
+        >
+          Borrar
+        </button>
+        <button
+          *ngIf="isAnswerAuthor(response.uid)"
+          class="btn btn-primary"
+          (click)="editAnswer(i)"
+        >
+          Editar
+        </button>
+        <div
+          *ngIf="deleteMode && position == i"
+          class="alert alert-danger mt-2"
+          role="alert"
+        >
+          Está seguro que desea eliminar la respuesta?
+          <button class="btn btn-secondary" (click)="deleteAnswer(aid, i)">
+            Si
+          </button>
+          <button class="btn btn-secondary" (click)="deleteMode = false">
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
