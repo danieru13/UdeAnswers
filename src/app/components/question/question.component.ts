@@ -78,7 +78,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       });
     });
   }
-  async deleteAnswer(id, i) {
+  async deleteAnswer(id, i, msg) {
     try {
       this.responses.splice(i, 1);
       var obj = { content: this.responses };
@@ -86,6 +86,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
       if (this.cont == 0) {
         this.answerService.deleteAnswerDocument(this.qid, id);
       }
+      this.deleteMode = false
+      this.toastService.showSuccess(msg);
     } catch (error) {
       console.log(error);
     }

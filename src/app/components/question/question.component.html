@@ -81,13 +81,14 @@
         >
           Editar
         </button>
-        <div
+        <div class="actions">
+          <div
           *ngIf="deleteMode && position == i"
           class="alert alert-danger mt-2"
           role="alert"
         >
           Está seguro que desea eliminar la respuesta?
-          <button class="btn btn-secondary" (click)="deleteAnswer(aid, i)">
+          <button class="btn btn-secondary" (click)="deleteAnswer(aid, i, 'Respuesta eliminada correctamente')">
             Si
           </button>
           <button class="btn btn-secondary" (click)="deleteMode = false">
@@ -95,6 +96,9 @@
           </button>
         </div>
       </div>
+
+        </div>
+        
     </div>
   </div>
 </div>
