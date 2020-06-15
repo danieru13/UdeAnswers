@@ -5,7 +5,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="questionForm">
       <div class="form-group">
         <label for="content">Contenido de la pregunta*</label>
         <input type="text" id="content" class="form-control" formControlName="content" />
@@ -15,5 +15,5 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-danger" (click)="activeModal.close('Close click')">Cancelar</button>
-    <button class="btn btn-primary" (click)="onSubmit()" [disabled]="questionForm.invalid">Enviar</button>
+    <button class="btn btn-primary" type="submit" (click)="onSubmit('La pregunta ha sido añadida correctamente')" [disabled]="questionForm.invalid">Enviar</button>
   </div>

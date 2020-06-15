@@ -17,3 +17,17 @@ img{
     height: 30px;
     border-radius: 20px;
 }
+.dropdown-toggle::after{
+    content: unset;
+}
+.dropdown-menu{
+    display: none;
+    width: 15em;
+}
+@media (max-width: 991.98px){
+.dropdown-menu.show{
+    left: unset;
+    right: 0;    
+    display: block;
+}
+}

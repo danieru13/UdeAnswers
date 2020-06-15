@@ -1,6 +1,28 @@
 <div class="card">
-    <form #answerForm = "ngForm" (ngSubmit)="onSubmit(answerForm)">                                
-        <textarea name="response" #response="ngModel" [(ngModel)]="content" required></textarea>            
-        <input type="submit" value="Enviar" [disabled]="!answerForm.form.valid">            
-    </form>    
-</div>  
+  <div class="card-header" *ngIf="user$ | async as user">
+    <img
+      class="img-perfil mr-sm-2"
+      src="{{ user.photoURL }}"
+      alt="{{ user.displayName }}"
+    />
+    <p class="my-0">{{ user.displayName }}</p>
+  </div>
+  <form #answerForm="ngForm" (ngSubmit)="onSubmit(answerForm, 'Respuesta enviada correctamente')">
+    <textarea
+      name="response"
+      #response="ngModel"
+      [(ngModel)]="content"
+      required
+      placeholder="Escribe tu respuesta"
+    ></textarea>
+
+    <div class="card-footer text-muted">
+      <input
+        class="btn btn-primary"
+        type="submit"
+        value="Enviar"
+        [disabled]="!answerForm.form.valid"
+      />
+    </div>
+  </form>
+</div>

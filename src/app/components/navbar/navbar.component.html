@@ -1,6 +1,24 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-custom">    
     <div class="container-fluid">
-        <a class="navbar-brand navbar-brand-color" [routerLink]="['/questions']">UdeAnswers</a>
+        <a class="navbar-brand navbar-brand-color" [routerLink]="['/questions']">UdeAnswers</a>        
+        <div class="row">
+          <div class="col">
+            <div ngbDropdown class="d-inline-block">
+              <button class="navbar-toggler" id="dropdownForm1" ngbDropdownToggle type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>          
+              </button>               
+              <div ngbDropdownMenu aria-labelledby="dropdownForm1" *ngIf="user$ | async as user;">          
+                <a ngbDropdownItem id="profile-image" class="nav-link nav-link-ns" [routerLink]="['/profile', user.uid]"><img src="{{user.photoURL}}" alt="perfil" class="ml-1 mr-2">Mi perfil </a> 
+                <button ngbDropdownItem (click)="addQuestion()">Añadir Pregunta</button>
+                <div class="dropdown-divider"></div>      
+                <input id="searchMenu" (keyup.enter)="search(txtSearchMenu.value)" style="width: 95%;" type="text" class="form-control ml-1" placeholder="Buscar..." #txtSearchMenu>                                    
+                <div class="dropdown-divider"></div>                
+                <button ngbDropdownItem (click)="authService.signOut()">Cerrar Sesión</button>
+              </div>
+            </div>
+          </div>
+        </div>                       
+        
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item " [routerLinkActive]="['active']">            

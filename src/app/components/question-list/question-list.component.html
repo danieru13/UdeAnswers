@@ -1,30 +1,66 @@
-<div class="card mt-3 mb-2 pregunta" (click)="addQuestion()">
-    <div class="card-header" *ngIf="user$ | async as user;">
-      <img class="img-perfil mr-sm-2" src="{{user.photoURL}}" alt="{{user.displayName}}">
-      <p class="my-0">{{user.displayName}}</p> 
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">¿Tienes alguna pregunta?</h5>   
-      <p class="card-text">Compártela con todos!.</p>      
-    </div>    
-  </div>  
+<div class="card mt-4 mb-2 create-question" (click)="addQuestion()">
+  <div class="card-header" *ngIf="user$ | async as user">
+    <img
+      class="img-perfil mr-sm-2"
+      src="{{ user.photoURL }}"
+      alt="{{ user.displayName }}"
+    />
+    <p class="my-0">{{ user.displayName }}</p>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">¿Tienes alguna pregunta?</h5>
+    <p class="card-text">Compártela con todos!.</p>
+  </div>
+</div>
 <div class="question-component">
-    <div *ngIf="questions.length >0; else sinitems">
-    </div>
-    <div>
-        <ul *ngFor="let question of questions">
-            <div class="card">
-                <div class="card-body">                    
-                    <a class="card-title" [routerLink]="['/question', question._id]">{{question.content}}</a>
-                    <p class="card-text"></p>
-                    <a *ngIf="!isAuthor(question)" [routerLink]="['/question', question._id]" class="btn btn-success">Responder</a>                    
-                    <button *ngIf="isAuthor(question)" (click)="deleteQuestion(question)"  type="button" class="btn btn-danger">Borrar</button>
-                  </div>                
-                
-            </div>      
-        </ul>        
-    </div>    
-    <ng-template #sinitems>
-        <span>No hay datos</span>
-    </ng-template>
+  <div *ngIf="questions.length > 0; else sinitems"></div>
+  <div>
+    <ul *ngFor="let question of questions; let i = index">      
+      <div class="card preguntas" >
+        <a id="redirect" [routerLink]="['/question', question._id]"></a>
+        <div class="card-body">
+          <a class="card-title" [routerLink]="['/question', question._id]">{{
+            question.content
+          }}</a>
+          <p class="card-text"></p>
+          <div class="actions">
+            <a
+              *ngIf="!isAuthor(question)"
+              [routerLink]="['/question', question._id]"
+              class="btn btn-success"
+              >Responder</a
+            >
+            <button
+              *ngIf="isAuthor(question)"
+              (click)="showAlert(i)"
+              type="button"
+              class="btn btn-danger"                            
+            >
+              Borrar
+            </button>
+            <div
+              *ngIf="deleteMode && position == i"
+              class="alert alert-danger mt-2"
+              role="alert"
+            >
+              Está seguro que desea eliminar la pregunta?
+              <button
+                class="btn btn-secondary"
+                (click)="deleteQuestion(question, 'Pregunta eliminada correctamente')"
+              >
+                Si
+              </button>
+              <button class="btn btn-secondary" (click)="deleteMode = false">
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </ul>
+  </div>
+  <ng-template #sinitems>
+    <span>No hay datos</span>
+  </ng-template>  
 </div>

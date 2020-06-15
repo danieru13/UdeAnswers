@@ -18,7 +18,9 @@ import { QuestionComponent } from './components/question/question.component';
 import { AnswerCreateComponent } from './components/answer-create/answer-create.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { QuestionListByAuthorComponent } from './components/question-list-by-author/question-list-by-author.component';
-
+import { AnswerEditComponent } from './components/answer-edit/answer-edit.component';
+import { ToastComponent } from './components/toast/toast.component';
+import {NgbDropdown} from '@ng-bootstrap/ng-bootstrap'
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { QuestionListByAuthorComponent } from './components/question-list-by-aut
     AnswerCreateComponent,
     ProfileComponent,
     QuestionListByAuthorComponent,
+    AnswerEditComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,7 @@ import { QuestionListByAuthorComponent } from './components/question-list-by-aut
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule    
+    NgbModule,    
   ],
   providers: [],
   bootstrap: [AppComponent]
