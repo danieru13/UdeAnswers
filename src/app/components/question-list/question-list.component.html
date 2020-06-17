@@ -17,7 +17,7 @@
   <div>
     <ul *ngFor="let question of questions; let i = index">      
       <div class="card preguntas" >
-        <a id="redirect" [routerLink]="['/question', question._id]"></a>
+        <a class="redirect" [routerLink]="['/question', question._id]"></a>
         <div class="card-body">
           <a class="card-title" [routerLink]="['/question', question._id]">{{
             question.content

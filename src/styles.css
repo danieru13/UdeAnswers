@@ -13,6 +13,9 @@ body{
 	margin:0;
 	padding-top: 50px;
 }
+a{
+    color:black
+}
 .navbar{
 	height: 60px;
 }
@@ -65,4 +68,18 @@ body{
 }
 .alert .btn{
     margin-left: 10px;
+}
+
+.preguntas{
+    cursor: pointer;
+}
+.preguntas:hover{
+    box-shadow: 2px 8px 15px rgba(0, 0, 0, .15);
+    transform: translate3D(0, -2px, 0);
+    background: rgba(0, 0, 0, 0.004);
+}
+.redirect{
+    width: 100%;
+    height: 100%;    
+    position: absolute;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { QuestionService } from '../../services/question.service';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-question-list-by-author',
@@ -9,7 +10,8 @@ import { QuestionService } from '../../services/question.service';
 export class QuestionListByAuthorComponent implements OnInit {
   
   private _uid = '';
-
+  deleteMode = false;
+  position: Number
   @Input() 
   set uid(uid: string) {
     this._uid = (uid);
@@ -19,7 +21,7 @@ export class QuestionListByAuthorComponent implements OnInit {
   get uid(): string { return this._uid; }
   questions = [];
 
-  constructor(private questionsService: QuestionService) { }
+  constructor(private questionsService: QuestionService, private toastService:ToastService) { }
 
   ngOnInit(): void { }
 
@@ -38,5 +40,18 @@ export class QuestionListByAuthorComponent implements OnInit {
         }
       });
     }
+  }
+  async deleteQuestion(question, msg) {
+    try {
+        await this.questionsService.deleteQuestion(question);
+        this.deleteMode = false;  
+        this.toastService.showSuccess(msg);                    
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  showAlert(i){
+    this.deleteMode = true;
+    this.position = i;
   }
 }

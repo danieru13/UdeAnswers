@@ -1,9 +1,39 @@
-<div>
-    <ul *ngFor="let question of questions">
-        <div class="card">
-            <div class="card-body">
-                <a class="card-title" [routerLink]="['/question', question._id]">{{question.content}}</a>
+<div class="container mt-3" >
+    <ul *ngFor="let question of questions; let i = index">      
+        <div class="card preguntas" >
+          <a class="redirect" [routerLink]="['/question', question._id]"></a>
+          <div class="card-body">
+            <a class="card-title" [routerLink]="['/question', question._id]">{{
+              question.content
+            }}</a>
+            <p class="card-text"></p>
+            <div class="actions">              
+              <button               
+                (click)="showAlert(i)"
+                type="button"
+                class="btn btn-danger"                            
+              >
+                Borrar
+              </button>
+              <div
+                *ngIf="deleteMode && position == i"
+                class="alert alert-danger mt-2"
+                role="alert"
+              >
+                Está seguro que desea eliminar la pregunta?
+                <button
+                  class="btn btn-secondary"
+                  (click)="deleteQuestion(question, 'Pregunta eliminada correctamente')"
+                >
+                  Si
+                </button>
+                <button class="btn btn-secondary" (click)="deleteMode = false">
+                  No
+                </button>
+              </div>
             </div>
-        </div>      
-    </ul>        
+          </div>
+        </div>
+        
+      </ul>
 </div>    
