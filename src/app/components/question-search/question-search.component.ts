@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { QuestionService } from '../../services/question.service';
 import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-question-search',
@@ -11,25 +12,47 @@ import { Observable } from 'rxjs';
 })
 export class QuestionSearchComponent implements OnInit {
 
+  deleteMode = true;
+  position: number;
+  uid = '';
   public user$: Observable<any> = this.authService.afAuth.user; 
   constructor(private route: ActivatedRoute, 
               public _questions : QuestionService, 
-              private authService:AuthService) { }
+              private authService:AuthService,
+              private toastService: ToastService) { }
   
   ngOnInit(): void {
     this.route.params.subscribe(params=>{      
        this._questions.searchQuestion(params['query']);      
     })
+    this.getUId()
   }
-  isAuthor(question){
-    return this.user$ === question.author;
+  async getUId() {
+    await this.authService.user$.subscribe((data) => {
+      this.uid = data.uid;
+      return this.uid;
+    });
   }
-  deleteQuestion(question){
-    if(!this.isAuthor(question)){
-      alert("Denied")
-    }else{
-    this._questions.deleteQuestion(question);
+
+  isAuthor(question) {
+    return this.uid === question.author;
+  }
+  async deleteQuestion(question, msg) {
+    try {
+      if (!this.isAuthor(question)) {
+        alert('Denied');
+      } else {
+        await this._questions.deleteQuestion(question);
+        this.deleteMode = false;
+        this.toastService.showSuccess(msg);
+      }
+    } catch (error) {
+      console.log(error);
     }
+  }
+  showAlert(i) {
+    this.deleteMode = true;
+    this.position = i;
   }
 
 

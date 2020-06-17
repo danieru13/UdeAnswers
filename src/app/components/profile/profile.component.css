@@ -1,3 +1,7 @@
 #user-photo{
     width: 50px;
 }
+.app-question{
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
