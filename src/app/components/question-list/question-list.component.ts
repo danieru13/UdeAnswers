@@ -6,12 +6,19 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionCreateComponent } from '../question-create/question-create.component';
 import { ToastService } from '../../services/toast/toast.service';
 
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-question-list',
   templateUrl: './question-list.component.html',
   styleUrls: ['./question-list.component.css'],
 })
 export class QuestionListComponent implements OnInit {
+
+  // Icons
+  faTrash = faTrash;
+
+  // Everything else
   questions = [];
   uid = '';
   it: any;
