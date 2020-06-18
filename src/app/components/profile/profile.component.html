@@ -9,8 +9,8 @@
         src="{{ user.photoURL }}"
         alt="{{ user.displayName }}"
       />
-      <p>{{ user.displayName }}</p>
-      <p>{{ user.email }}</p>
+      <p><fa-icon [icon]="faUser"></fa-icon> {{ user.displayName }}</p>
+      <p><fa-icon [icon]="faEnvelope"></fa-icon> {{ user.email }}</p>
     </div>
   </div>
 </div>
