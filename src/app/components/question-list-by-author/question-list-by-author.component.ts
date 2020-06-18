@@ -2,12 +2,19 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { QuestionService } from '../../services/question.service';
 import { ToastService } from '../../services/toast/toast.service';
 
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-question-list-by-author',
   templateUrl: './question-list-by-author.component.html',
   styleUrls: ['./question-list-by-author.component.css']
 })
 export class QuestionListByAuthorComponent implements OnInit {
+
+  // Icons
+  faTrash = faTrash;
+
+  // Everything else
   
   private _uid = '';
   deleteMode = false;

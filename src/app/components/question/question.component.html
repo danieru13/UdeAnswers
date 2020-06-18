@@ -72,7 +72,7 @@
           (click)="showAlert(i)"
           class="btn btn-danger mr-2"
         >
-          Borrar
+          <fa-icon [icon]="faTrash"></fa-icon>
         </button>
         <button
           *ngIf="isAnswerAuthor(response.uid)"
