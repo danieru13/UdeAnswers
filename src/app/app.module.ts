@@ -20,7 +20,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { QuestionListByAuthorComponent } from './components/question-list-by-author/question-list-by-author.component';
 import { AnswerEditComponent } from './components/answer-edit/answer-edit.component';
 import { ToastComponent } from './components/toast/toast.component';
-import {NgbDropdown} from '@ng-bootstrap/ng-bootstrap'
+import {NgbDropdown} from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {NgbDropdown} from '@ng-bootstrap/ng-bootstrap'
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule,    
+    NgbModule,
+    FontAwesomeModule,    
   ],
   providers: [],
   bootstrap: [AppComponent]
