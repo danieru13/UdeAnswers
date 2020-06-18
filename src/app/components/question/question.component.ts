@@ -9,6 +9,7 @@ import { AnswerEditComponent } from '../answer-edit/answer-edit.component';
 import { ToastService } from '../../services/toast/toast.service';
 
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-question',
@@ -18,7 +19,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export class QuestionComponent implements OnInit, OnDestroy {
   // Icons
   faTrash = faTrash;
-  
+  faEdit = faEdit;
+
   // Everything else
   question: any = {};
   uid: string = '';
