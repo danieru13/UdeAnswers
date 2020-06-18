@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionCreateComponent } from '../question-create/question-create.component';
 
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,6 +14,11 @@ import { QuestionCreateComponent } from '../question-create/question-create.comp
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  // Icons
+  faHome = faHome;
+
+  // Everything else
 
   uid: string = '';
   public user$: Observable<any> = this.authService.afAuth.user;
