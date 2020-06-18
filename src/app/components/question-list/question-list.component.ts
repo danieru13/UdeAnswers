@@ -7,6 +7,7 @@ import { QuestionCreateComponent } from '../question-create/question-create.comp
 import { ToastService } from '../../services/toast/toast.service';
 
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-question-list',
@@ -17,6 +18,7 @@ export class QuestionListComponent implements OnInit {
 
   // Icons
   faTrash = faTrash;
+  faComment = faComment;
 
   // Everything else
   questions = [];

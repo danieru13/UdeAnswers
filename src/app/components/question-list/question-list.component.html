@@ -24,12 +24,13 @@
           }}</a>
           <p class="card-text"></p>
           <div class="actions">
-            <a
+            <button
               *ngIf="!isAuthor(question)"
               [routerLink]="['/question', question._id]"
               class="btn btn-success"
-              >Responder</a
             >
+              <fa-icon [icon]="faComment"></fa-icon>
+          </button>
             <button
               *ngIf="isAuthor(question)"
               (click)="showAlert(i)"
