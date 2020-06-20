@@ -14,7 +14,7 @@ export class QuestionService {
   private questionsCollection: AngularFirestoreCollection<Question>;
   private questionDoc: AngularFirestoreDocument<Question>;
   private collectionName = "questions";
-  private db = this.firestore.collection(this.collectionName);
+  private db = this.firestore.collection(this.collectionName, ref => ref.orderBy('date','desc'));
   result: Question[];
 
   constructor(private firestore: AngularFirestore) {

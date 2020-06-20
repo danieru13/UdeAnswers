@@ -18,6 +18,9 @@
     <ul *ngFor="let question of questions; let i = index">      
       <div class="card preguntas" >
         <a class="redirect" [routerLink]="['/question', question._id]"></a>
+        <div class="card-header">
+          {{question.date.toDate() | date: 'MMM d, y, h:mm a'}}
+        </div>
         <div class="card-body">
           <a class="card-title" [routerLink]="['/question', question._id]">{{
             question.content
