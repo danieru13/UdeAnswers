@@ -26,8 +26,7 @@ export class AnswerCreateComponent implements OnInit {
 
     await this.answerService.addAnswer(this.content, this.questionId);
     form.reset();
-    this.content = "";
-    this.answerService.showAnswerCreate = false;
+    this.content = "";    
     this.toastService.showSuccess(msg)
     } catch (error) {
       console.log(error)

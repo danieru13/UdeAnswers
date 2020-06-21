@@ -20,8 +20,7 @@ export class AnswerService {
   private db = this.afs.collection(this.collectionName);
   public response: Observable<Answer[]>;
   public user$: Observable<any> = this.auth.afAuth.user;
-  public aid = "";  
-  public showAnswerCreate = false;
+  public aid = "";    
   constructor(
     private afs: AngularFirestore,
     private questionService: QuestionService,

@@ -7,14 +7,7 @@
     </div>    
   </div>
   <div class="card-body">
-    <h3 class="mb-3">{{ question.content }}</h3>
-    <button
-      *ngIf="!isAuthor(question)"
-      (click)="answer()"
-      class="btn btn-success"
-    >
-      Responder
-    </button>
+    <h3 class="mb-3">{{ question.content }}</h3>   
     <div class="actions">
       <button
         *ngIf="isAuthor(question)"
@@ -41,7 +34,7 @@
 </div>
 <hr />
 <app-answer-create
-  *ngIf="answerService.showAnswerCreate; else br"
+  *ngIf="!isAuthor(question); else br"
   [questionId]="question._id"
 ></app-answer-create>
 

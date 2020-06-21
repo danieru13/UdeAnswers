@@ -144,10 +144,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.log(error);
     }
-  }
-  answer() {
-    this.answerService.showAnswerCreate = true;
-  }
+  } 
   editAnswer(id) {
     const modal = this.modalService.open(AnswerEditComponent);
     modal.result;
