@@ -3,8 +3,9 @@ export interface Answer {
     qid?: string;
     content?: {
         author?: string,
-        uid?: string,
-        content?: string,
+        uid: string,
+        content: string,
+        date: Date,
         score?: number;
     }[]
 }

@@ -11,13 +11,15 @@ import { ToastService } from '../../services/toast/toast.service';
   styleUrls: ['./answer-edit.component.css']
 })
 export class AnswerEditComponent implements OnInit {
-
-  content: string = '';
+  //Form y contenido
   answerForm: FormGroup;
+  content: string = '';
+  // Valores que son pasados a través de la propiedad componentInstance del modal
   answer: Answer;
-  responseId: number;
-  aid: string;
+  responseId: number;  
   responses = [];
+  aid: string;
+  date : Date;  
 
   constructor(
     public answerService: AnswerService,
@@ -44,6 +46,7 @@ export class AnswerEditComponent implements OnInit {
     }
     this.content = this.answerForm.value.content;
     this.responses[this.responseId].content = this.content;
+    this.responses[this.responseId].date = this.date;
     var obj= {content: this.responses}     
     await this.answerService.updateAnswer(this.aid, obj).then(()=>this.activeModal.dismiss());   
     this.content = "";

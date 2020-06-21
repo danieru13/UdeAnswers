@@ -3,18 +3,11 @@
     <img class="img-perfil mr-sm-2" src="{{ imgAuthor }}" alt="Usuario" />
     <div>
       <p class="my-0">{{ author }}</p>
-      <p *ngIf="question.date">{{question?.date.toDate() | date: 'MMM d, y, h:mm a'}}</p>
+      <p *ngIf="question.date">{{question.date.toDate() | date: 'MMM d, y, h:mm a'}}</p>
     </div>    
   </div>
   <div class="card-body">
-    <h3 class="mb-3">{{ question.content }}</h3>
-    <button
-      *ngIf="!isAuthor(question)"
-      (click)="answer()"
-      class="btn btn-success"
-    >
-      Responder
-    </button>
+    <h3 class="mb-3">{{ question.content }}</h3>   
     <div class="actions">
       <button
         *ngIf="isAuthor(question)"
@@ -41,7 +34,7 @@
 </div>
 <hr />
 <app-answer-create
-  *ngIf="answerService.showAnswerCreate; else br"
+  *ngIf="!isAuthor(question); else br"
   [questionId]="question._id"
 ></app-answer-create>
 
@@ -53,20 +46,19 @@
 
 <div *ngIf="responses">
   <div class="card mb-3" *ngFor="let response of responses; let i = index">
-    <div class="card-header" *ngIf="response.content">
-      <div>
-        <img
-          id="img-author"
-          class="mt-1 ml-2"
+    <div class="card-header info-card-header" *ngIf="response.content">      
+        <img          
+          class="img-perfil mr-sm-2"
           src="{{ response.photoURL }}"
-          alt="{{ response.author }}"
-          width="30px"
+          alt="{{ response.author }}"          
         />
-        <p class="ml-2" [ngStyle]="{ display: 'inline' }">
-          {{ response.author }}
-        </p>
-        
-      </div>
+        <div>
+          <p class="my-0">
+            {{ response.author }}
+          </p>
+          <p *ngIf="response.date">{{response.date | date: 'MMM d, y, h:mm a'}}</p>      
+
+        </div> 
     </div>
     <div class="card-body">
       <p class="ml-2">{{ response.content }}</p>
