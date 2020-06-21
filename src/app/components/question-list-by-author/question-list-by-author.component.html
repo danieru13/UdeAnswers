@@ -1,6 +1,10 @@
 <div class="container mt-3" >
-    <ul *ngFor="let question of questions; let i = index">      
+    <ul *ngFor="let question of questions; let i = index">         
         <div class="card preguntas" >
+          <div class="card-header info-card-header">
+            <p></p>
+            <p *ngIf="question.date">{{question.date.toDate() | date: 'MMM d, y, h:mm a'}}</p>
+          </div>   
           <a class="redirect" [routerLink]="['/question', question._id]"></a>
           <div class="card-body">
             <a class="card-title" [routerLink]="['/question', question._id]">{{

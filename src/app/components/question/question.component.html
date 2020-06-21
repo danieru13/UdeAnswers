@@ -1,7 +1,10 @@
 <div class="card mt-3 mb-2">
-  <div class="card-header" [ngStyle]="{ display: 'flex' }">
-    <img class="img-perfil mr-sm-2" src="{{ imgAuthor }}" alt="..." />
-    <p class="my-0">{{ author }}</p>
+  <div class="card-header info-card-header">
+    <img class="img-perfil mr-sm-2" src="{{ imgAuthor }}" alt="Usuario" />
+    <div>
+      <p class="my-0">{{ author }}</p>
+      <p *ngIf="question.date">{{question?.date.toDate() | date: 'MMM d, y, h:mm a'}}</p>
+    </div>    
   </div>
   <div class="card-body">
     <h3 class="mb-3">{{ question.content }}</h3>
@@ -62,6 +65,7 @@
         <p class="ml-2" [ngStyle]="{ display: 'inline' }">
           {{ response.author }}
         </p>
+        
       </div>
     </div>
     <div class="card-body">

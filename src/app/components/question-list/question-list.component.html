@@ -15,9 +15,16 @@
 <div class="question-component">
   <div *ngIf="questions.length > 0; else sinitems"></div>
   <div>
-    <ul *ngFor="let question of questions; let i = index">      
+    <ul *ngFor="let question of questions; let i = index">   
       <div class="card preguntas" >
         <a class="redirect" [routerLink]="['/question', question._id]"></a>
+        <div class="card-header info-card-header">
+          <img class="img-perfil mr-sm-2" src="{{ question.authorImg }}" alt="..." />
+          <div>
+            <p class="my-0">{{ question.authorName }}</p>
+            <p *ngIf="question.date">{{question?.date.toDate() | date: 'MMM d, y, h:mm a'}}</p>
+          </div>    
+        </div>        
         <div class="card-body">
           <a class="card-title" [routerLink]="['/question', question._id]">{{
             question.content

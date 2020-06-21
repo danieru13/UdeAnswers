@@ -83,3 +83,13 @@ a{
     height: 100%;    
     position: absolute;
 }
+.info-card-header{
+    display: flex;    
+}
+.info-card-header p{
+    line-height: 1em;
+}
+.info-card-header p:nth-child(2){
+    margin-bottom: 0;
+    font-size: 80%;
+}

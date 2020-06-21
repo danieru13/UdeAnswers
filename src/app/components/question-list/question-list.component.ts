@@ -37,7 +37,15 @@ export class QuestionListComponent implements OnInit {
 
   ngOnInit() {
     this.QuestionService.getQuestions().subscribe((questions) => {
-      this.questions = questions;
+      //Obtiene las preguntas
+      this.questions = questions; 
+      this.questions.forEach((question,i)=>{
+        //Recorre las preguntas para agregar la imagen y el nombre del autor
+      this.auth.getUserById(question.author).get().subscribe((user)=>{
+        question.authorName = user.data().displayName;
+        question.authorImg = user.data().photoURL
+      })        
+      })        
     });
 
     this.getUId();
