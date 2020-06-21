@@ -8,29 +8,27 @@ import { ToastService } from '../../services/toast/toast.service';
   selector: 'app-answer-create',
   templateUrl: './answer-create.component.html',
   styleUrls: ['./answer-create.component.css'],
-  
 })
 export class AnswerCreateComponent implements OnInit {
   @Input() questionId: string;
-  content: string = '';  
+  content: string = '';
   public user$: Observable<any> = this.auth.afAuth.user;
   constructor(
-    public answerService: AnswerService, private auth: AuthService , private toastService: ToastService
+    public answerService: AnswerService,
+    private auth: AuthService,
+    private toastService: ToastService
   ) {}
 
-  ngOnInit() {        
-  } 
+  ngOnInit() {}
 
   async onSubmit(form, msg) {
     try {
-
-    await this.answerService.addAnswer(this.content, this.questionId);
-    form.reset();
-    this.content = "";    
-    this.toastService.showSuccess(msg)
+      await this.answerService.addAnswer(this.content, this.questionId);
+      form.reset();
+      this.content = '';
+      this.toastService.showSuccess(msg);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  } 
-  
+  }
 }

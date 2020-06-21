@@ -47,13 +47,13 @@ export class AnswerService {
       await this.user$.subscribe((user) => {        
         uid = user.uid;        
       });
-      
+      var date = new Date();
       this.questionService.getQuestionById(questionid).subscribe((d)=>{                
         if(d.data().responses){
           this.query(questionid).get().subscribe((data)=>{            
             data.forEach((doc)=>{                                          
               aux =doc.data().content                  
-              aux.push({uid,content})                  
+              aux.push({uid,content, date})                  
               const ans = {id : doc.id, content: aux}              
               this.updateAnswer(ans.id,ans)              
             })           
@@ -61,7 +61,8 @@ export class AnswerService {
           
         }else{
           var answer: Answer = {qid: questionid,content: []};          
-          answer.content.push({ uid, content });
+          
+          answer.content.push({ uid, content, date });
           this.answersCollection.add(answer).then(doc=>{
             var id = doc.id
             var data={

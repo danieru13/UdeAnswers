@@ -70,17 +70,24 @@ export class QuestionComponent implements OnInit, OnDestroy {
   getResponses(id) {
     this.answerService.getAnswersByQuestionId(id).subscribe((data) => {
       data.forEach((doc) => {
+        //recupera las respuestas y se asignan a un array
         this.responses = doc.content;
+        //Id del documento
         this.aid = doc.id;
+        //contador de respuestas
         this.cont = this.responses.length;
         this.responses.forEach((d) => {
+          //Id del autor de la respuesta
           var id = d.uid;
+          //Fecha de creación
+          d.date = d.date.toDate()
           this.auth
+            //Busca el nombre y la imagen del autor para asignarlas al array
             .getUserById(id)
             .get()
             .subscribe((user) => {
               d.photoURL = user.data().photoURL;
-              d.author = user.data().displayName;
+              d.author = user.data().displayName;              
             });
         });
       });
@@ -88,9 +95,13 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
   async deleteAnswer(id, i, msg) {
     try {
+      //Elimina en el array de respuestas la que llega como parametro
       this.responses.splice(i, 1);
+      //Objeto con el nuevo array
       var obj = { content: this.responses };
+      //Se actualiza el documento de respuestas con el nuevo objeto
       await this.answerService.updateAnswer(id, obj);
+      //Si no queda ninguna respuesta se elimina el documento
       if (this.cont == 0) {
         this.answerService.deleteAnswerDocument(this.qid, id);
       }
@@ -146,12 +157,16 @@ export class QuestionComponent implements OnInit, OnDestroy {
     }
   } 
   editAnswer(id) {
-    const modal = this.modalService.open(AnswerEditComponent);
+    //Abre el modal
+    const modal = this.modalService.open(AnswerEditComponent);    
     modal.result;
+    let date = new Date();
+    //Con componentInstance se asignan los valores especificos que se requieran para utilizarlos en otro componente
     modal.componentInstance.answer = this.responses[id];
     modal.componentInstance.responseId = id;
     modal.componentInstance.aid = this.aid;
     modal.componentInstance.responses = this.responses;
+    modal.componentInstance.date = date
   }
   showAlert(i) {
     this.deleteMode = true;
