@@ -22,7 +22,7 @@ export class QuestionListByAuthorComponent implements OnInit {
   @Input() 
   set uid(uid: string) {
     this._uid = (uid);
-    this.getData(); 
+    this.getData();     
   };
 
   get uid(): string { return this._uid; }
