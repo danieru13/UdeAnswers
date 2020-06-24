@@ -52,7 +52,8 @@ export class QuestionListByAuthorComponent implements OnInit {
     try {
         await this.questionsService.deleteQuestion(question);
         this.deleteMode = false;  
-        this.toastService.showSuccess(msg);                    
+        this.toastService.showSuccess(msg);
+        this.getData();                    
     } catch (error) {
       console.log(error);
     }
