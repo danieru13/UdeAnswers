@@ -7,9 +7,11 @@ import { AnswerService } from '../../services/answer.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnswerEditComponent } from '../answer-edit/answer-edit.component';
 import { ToastService } from '../../services/toast/toast.service';
+import { ConfirmDeleteComponent } from '../toast/confirm-delete.component';
 
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-question',
@@ -20,7 +22,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   // Icons
   faTrash = faTrash;
   faEdit = faEdit;
-
+  faExclamationCircle = faExclamationCircle;
   // Everything else
   question: any = {};
   uid: string = '';
@@ -80,14 +82,14 @@ export class QuestionComponent implements OnInit, OnDestroy {
           //Id del autor de la respuesta
           var id = d.uid;
           //Fecha de creación
-          d.date = d.date.toDate()
+          d.date = d.date.toDate();
           this.auth
             //Busca el nombre y la imagen del autor para asignarlas al array
             .getUserById(id)
             .get()
             .subscribe((user) => {
               d.photoURL = user.data().photoURL;
-              d.author = user.data().displayName;              
+              d.author = user.data().displayName;
             });
         });
       });
@@ -105,7 +107,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       if (this.cont == 0) {
         this.answerService.deleteAnswerDocument(this.qid, id);
       }
-      this.deleteMode = false
+      this.deleteMode = false;
       this.toastService.showSuccess(msg);
     } catch (error) {
       console.log(error);
@@ -143,22 +145,19 @@ export class QuestionComponent implements OnInit, OnDestroy {
   isAnswerAuthor(id) {
     return this.uid === id;
   }
-  async deleteQuestion(question, msg) {
-    try {
-      if (!this.isAuthor(question)) {
-        alert('Denied');
-      } else {
-        await this.questionService.deleteQuestion(question);
-        this.toastService.showSuccess(msg);
-        this.gotoList();
-      }
-    } catch (error) {
-      console.log(error);
+  deleteQuestion(question) {
+    if (!this.isAuthor(question)) {
+      alert('Denied');
+    } else {
+      const modal = this.modalService.open(ConfirmDeleteComponent);
+      modal.result;
+      modal.componentInstance.tipo = 'Pregunta';
+      modal.componentInstance.question = question;
     }
-  } 
+  }
   editAnswer(id) {
     //Abre el modal
-    const modal = this.modalService.open(AnswerEditComponent);    
+    const modal = this.modalService.open(AnswerEditComponent);
     modal.result;
     let date = new Date();
     //Con componentInstance se asignan los valores especificos que se requieran para utilizarlos en otro componente
@@ -166,7 +165,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     modal.componentInstance.responseId = id;
     modal.componentInstance.aid = this.aid;
     modal.componentInstance.responses = this.responses;
-    modal.componentInstance.date = date
+    modal.componentInstance.date = date;
   }
   showAlert(i) {
     this.deleteMode = true;

@@ -44,7 +44,7 @@ export class QuestionService {
   deleteQuestion(question: Question) {
        
     this.questionDoc = this.firestore.doc(`questions/${question._id}`)    
-    this.questionDoc.delete()
+    return this.questionDoc.delete()
     
   }  
  

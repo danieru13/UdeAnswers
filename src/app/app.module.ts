@@ -20,7 +20,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { QuestionListByAuthorComponent } from './components/question-list-by-author/question-list-by-author.component';
 import { AnswerEditComponent } from './components/answer-edit/answer-edit.component';
 import { ToastComponent } from './components/toast/toast.component';
-import {NgbDropdown} from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmDeleteComponent } from './components/toast/confirm-delete.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 @NgModule({
@@ -37,6 +37,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     QuestionListByAuthorComponent,
     AnswerEditComponent,
     ToastComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+  <div class="modal-body text-center">    
+    <fa-icon [icon]="faExclamationCircle" size="5x" [styles]="{'stroke': 'red', 'color': 'red'}"></fa-icon>
+      <div class="form-group">
+        <label for="content">Está seguro que desea eliminar esta {{tipo | lowercase}}?</label>  
+      </div>
+      <button type="button" class="btn btn-secondary mr-2" (click)="activeModal.close('Close click')">Cancelar</button>
+    <button class="btn btn-danger"  (click)="onDelete(tipo + ' eliminada correctamente')" ><fa-icon [icon]="faTrash"></fa-icon> Eliminar</button>         
+  </div>
+  
