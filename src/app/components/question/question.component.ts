@@ -93,26 +93,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
         });
       });
     });
-  }
-  async deleteAnswer(id, i, msg) {
-    // try {
-    //   //Elimina en el array de respuestas la que llega como parametro
-    //   this.responses.splice(i, 1);
-    //   //Objeto con el nuevo array
-    //   var obj = { content: this.responses };
-    //   //Se actualiza el documento de respuestas con el nuevo objeto
-    //   await this.answerService.updateAnswer(id, obj);
-    //   //Si no queda ninguna respuesta se elimina el documento
-    //   if (this.cont == 0) {
-    //     this.answerService.deleteAnswerDocument(this.qid, id);
-    //   }
-    //   this.deleteMode = false;
-    //   this.toastService.showSuccess(msg);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  }
-  showAlert(id, i) {
+  }  
+  deleteAnswer(id, i) {
     const modal = this.modalService.open(ConfirmDeleteComponent);
     modal.result;
     modal.componentInstance.tipo = 'Respuesta';
