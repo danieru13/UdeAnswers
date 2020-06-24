@@ -3,32 +3,21 @@
     <img class="img-perfil mr-sm-2" src="{{ imgAuthor }}" alt="Usuario" />
     <div>
       <p class="my-0">{{ author }}</p>
-      <p *ngIf="question.date">{{question.date.toDate() | date: 'MMM d, y, h:mm a'}}</p>
-    </div>    
+      <p *ngIf="question.date">
+        {{ question.date.toDate() | date: "MMM d, y, h:mm a" }}
+      </p>
+    </div>
   </div>
   <div class="card-body">
-    <h3 class="mb-3">{{ question.content }}</h3>   
+    <h3 class="mb-3">{{ question.content }}</h3>
     <div class="actions">
       <button
         *ngIf="isAuthor(question)"
-        (click)="deleteQuestionMode = true"
+        (click)="deleteQuestion(question)"
         class="btn btn-danger"
       >
         <fa-icon [icon]="faTrash"></fa-icon>
-      </button>
-      <div
-        *ngIf="deleteQuestionMode"
-        class="alert alert-danger mt-2"
-        role="alert"
-      >
-        Está seguro que desea eliminar la pregunta?
-        <button class="btn btn-secondary" (click)="deleteQuestion(question,'Pregunta eliminada correctamente')">
-          Si
-        </button>
-        <button class="btn btn-secondary" (click)="deleteQuestionMode = false">
-          No
-        </button>
-      </div>
+      </button>      
     </div>
   </div>
 </div>
@@ -39,33 +28,34 @@
 ></app-answer-create>
 
 <ng-template #br>
-  <br />
+  <br />  
 </ng-template>
 <hr />
 <p>Respuestas: {{ cont }}</p>
 
 <div *ngIf="responses">
   <div class="card mb-3" *ngFor="let response of responses; let i = index">
-    <div class="card-header info-card-header" *ngIf="response.content">      
-        <img          
-          class="img-perfil mr-sm-2"
-          src="{{ response.photoURL }}"
-          alt="{{ response.author }}"          
-        />
-        <div>
-          <p class="my-0">
-            {{ response.author }}
-          </p>
-          <p *ngIf="response.date">{{response.date | date: 'MMM d, y, h:mm a'}}</p>      
-
-        </div> 
+    <div class="card-header info-card-header" *ngIf="response.content">
+      <img
+        class="img-perfil mr-sm-2"
+        src="{{ response.photoURL }}"
+        alt="{{ response.author }}"
+      />
+      <div>
+        <p class="my-0">
+          {{ response.author }}
+        </p>
+        <p *ngIf="response.date">
+          {{ response.date | date: "MMM d, y, h:mm a" }}
+        </p>
+      </div>
     </div>
     <div class="card-body">
       <p class="ml-2">{{ response.content }}</p>
       <div>
         <button
           *ngIf="isAnswerAuthor(response.uid)"
-          (click)="showAlert(i)"
+          (click)="deleteAnswer(aid, i)"
           class="btn btn-danger mr-2"
         >
           <fa-icon [icon]="faTrash"></fa-icon>
@@ -76,25 +66,8 @@
           (click)="editAnswer(i)"
         >
           <fa-icon [icon]="faEdit"></fa-icon>
-        </button>
-        <div class="actions">
-          <div
-          *ngIf="deleteMode && position == i"
-          class="alert alert-danger mt-2"
-          role="alert"
-        >
-          Está seguro que desea eliminar la respuesta?
-          <button class="btn btn-secondary" (click)="deleteAnswer(aid, i, 'Respuesta eliminada correctamente')">
-            Si
-          </button>
-          <button class="btn btn-secondary" (click)="deleteMode = false">
-            No
-          </button>
-        </div>
+        </button>        
       </div>
-
-        </div>
-        
     </div>
   </div>
 </div>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 

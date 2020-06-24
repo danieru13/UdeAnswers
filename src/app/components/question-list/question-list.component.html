@@ -40,28 +40,12 @@
           </button>
             <button
               *ngIf="isAuthor(question)"
-              (click)="showAlert(i)"
+              (click)="deleteQuestion(question)"
               type="button"
               class="btn btn-danger"                            
             >
               <fa-icon [icon]="faTrash"></fa-icon>
-            </button>
-            <div
-              *ngIf="deleteMode && position == i"
-              class="alert alert-danger mt-2"
-              role="alert"
-            >
-              Está seguro que desea eliminar la pregunta?
-              <button
-                class="btn btn-secondary"
-                (click)="deleteQuestion(question, 'Pregunta eliminada correctamente')"
-              >
-                Si
-              </button>
-              <button class="btn btn-secondary" (click)="deleteMode = false">
-                No
-              </button>
-            </div>
+            </button>            
           </div>
         </div>
       </div>

@@ -38,13 +38,18 @@ export class QuestionService {
 
   getQuestionsByAuthor(uid){
     return this.firestore.collection("questions", ref => 
-    ref.where('author', '==', uid)).get();
+    ref.where('author', '==', uid)).snapshotChanges().pipe(map(actions=>{
+      return actions.map(question =>{
+        const data = question.payload.doc.data() as Question
+        return data;
+      })
+    }))
   }
 
   deleteQuestion(question: Question) {
        
     this.questionDoc = this.firestore.doc(`questions/${question._id}`)    
-    this.questionDoc.delete()
+    return this.questionDoc.delete()
     
   }  
  
