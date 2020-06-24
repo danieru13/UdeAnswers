@@ -6,9 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { AnswerService } from '../../services/answer.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AnswerEditComponent } from '../answer-edit/answer-edit.component';
-import { ToastService } from '../../services/toast/toast.service';
 import { ConfirmDeleteComponent } from '../toast/confirm-delete.component';
-
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
@@ -25,13 +23,9 @@ export class QuestionComponent implements OnInit, OnDestroy {
   faExclamationCircle = faExclamationCircle;
   // Everything else
   question: any = {};
-  uid: string = '';
-  flag = false;
+  uid: string = '';  
   sub: Subscription;
-  responses = [];
-  deleteMode = false;
-  deleteQuestionMode = false;
-  position: number;
+  responses = [];   
   public author = '';
   public imgAuthor = '';
   public cont = 0;

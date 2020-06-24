@@ -4,8 +4,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { QuestionCreateComponent } from '../question-create/question-create.component';
-import { ToastService } from '../../services/toast/toast.service';
-
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { ConfirmDeleteComponent } from '../toast/confirm-delete.component';
@@ -23,8 +21,7 @@ export class QuestionListComponent implements OnInit {
 
   // Everything else
   questions = [];
-  uid = '';
-  it: any;  
+  uid = '';   
   public user$: Observable<any> = this.auth.afAuth.user;
 
   constructor(
@@ -37,7 +34,7 @@ export class QuestionListComponent implements OnInit {
     this.QuestionService.getQuestions().subscribe((questions) => {
       //Obtiene las preguntas
       this.questions = questions; 
-      this.questions.forEach((question,i)=>{
+      this.questions.forEach((question)=>{
         //Recorre las preguntas para agregar la imagen y el nombre del autor
       this.auth.getUserById(question.author).get().subscribe((user)=>{
         question.authorName = user.data().displayName;
