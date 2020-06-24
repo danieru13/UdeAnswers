@@ -3,6 +3,8 @@ import { QuestionService } from '../../services/question.service';
 import { ToastService } from '../../services/toast/toast.service';
 
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmDeleteComponent } from '../toast/confirm-delete.component';
 
 @Component({
   selector: 'app-question-list-by-author',
@@ -28,7 +30,7 @@ export class QuestionListByAuthorComponent implements OnInit {
   get uid(): string { return this._uid; }
   questions = [];
 
-  constructor(private questionsService: QuestionService, private toastService:ToastService) { }
+  constructor(private questionsService: QuestionService, private toastService:ToastService, private modalService: NgbModal) { }
 
   ngOnInit(): void { }
 
@@ -48,12 +50,13 @@ export class QuestionListByAuthorComponent implements OnInit {
       });
     }
   }
-  async deleteQuestion(question, msg) {
-    try {
-        await this.questionsService.deleteQuestion(question);
-        this.deleteMode = false;  
-        this.toastService.showSuccess(msg);
-        this.getData();                    
+  async deleteQuestion(question) {
+    try {        
+        const modal = this.modalService.open(ConfirmDeleteComponent);        
+        modal.componentInstance.tipo = 'Pregunta';
+        modal.componentInstance.question = question;                 
+        modal.result.finally(()=> this.getData())
+        
     } catch (error) {
       console.log(error);
     }

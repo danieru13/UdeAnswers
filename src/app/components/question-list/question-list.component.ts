@@ -8,6 +8,7 @@ import { ToastService } from '../../services/toast/toast.service';
 
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
+import { ConfirmDeleteComponent } from '../toast/confirm-delete.component';
 
 @Component({
   selector: 'app-question-list',
@@ -23,16 +24,13 @@ export class QuestionListComponent implements OnInit {
   // Everything else
   questions = [];
   uid = '';
-  it: any;
-  deleteMode = false;
-  position: number;
+  it: any;  
   public user$: Observable<any> = this.auth.afAuth.user;
 
   constructor(
     private QuestionService: QuestionService,
     private auth: AuthService,
-    private modalService: NgbModal,
-    private toastService: ToastService
+    private modalService: NgbModal,    
   ) {}
 
   ngOnInit() {
@@ -62,24 +60,18 @@ export class QuestionListComponent implements OnInit {
     return this.uid === question.author;
   }
 
-  async deleteQuestion(question, msg) {
-    try {
-      if (!this.isAuthor(question)) {
-        alert('Denied');
-      } else {
-        await this.QuestionService.deleteQuestion(question);
-        this.deleteMode = false;
-        this.toastService.showSuccess(msg);
-      }
-    } catch (error) {
-      console.log(error);
+  deleteQuestion(question) {
+    
+    if (!this.isAuthor(question)) {
+      alert('Denied');
+    } else {
+      const modal = this.modalService.open(ConfirmDeleteComponent);
+      modal.result;
+      modal.componentInstance.tipo = 'Pregunta';
+      modal.componentInstance.question = question;
     }
   }
   addQuestion() {
     this.modalService.open(QuestionCreateComponent);
-  }
-  showAlert(i) {
-    this.deleteMode = true;
-    this.position = i;
-  }
+  }  
 }

@@ -44,8 +44,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     private questionService: QuestionService,
     private auth: AuthService,
     public answerService: AnswerService,
-    private modalService: NgbModal,
-    private toastService: ToastService
+    private modalService: NgbModal,    
   ) {}
 
   ngOnInit(): void {
@@ -96,22 +95,32 @@ export class QuestionComponent implements OnInit, OnDestroy {
     });
   }
   async deleteAnswer(id, i, msg) {
-    try {
-      //Elimina en el array de respuestas la que llega como parametro
-      this.responses.splice(i, 1);
-      //Objeto con el nuevo array
-      var obj = { content: this.responses };
-      //Se actualiza el documento de respuestas con el nuevo objeto
-      await this.answerService.updateAnswer(id, obj);
-      //Si no queda ninguna respuesta se elimina el documento
-      if (this.cont == 0) {
-        this.answerService.deleteAnswerDocument(this.qid, id);
-      }
-      this.deleteMode = false;
-      this.toastService.showSuccess(msg);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   //Elimina en el array de respuestas la que llega como parametro
+    //   this.responses.splice(i, 1);
+    //   //Objeto con el nuevo array
+    //   var obj = { content: this.responses };
+    //   //Se actualiza el documento de respuestas con el nuevo objeto
+    //   await this.answerService.updateAnswer(id, obj);
+    //   //Si no queda ninguna respuesta se elimina el documento
+    //   if (this.cont == 0) {
+    //     this.answerService.deleteAnswerDocument(this.qid, id);
+    //   }
+    //   this.deleteMode = false;
+    //   this.toastService.showSuccess(msg);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  }
+  showAlert(id, i) {
+    const modal = this.modalService.open(ConfirmDeleteComponent);
+    modal.result;
+    modal.componentInstance.tipo = 'Respuesta';
+    modal.componentInstance.answerId = id;
+    modal.componentInstance.answerPosition = i
+    modal.componentInstance.responses = this.responses
+    modal.componentInstance.cont = this.cont
+    modal.componentInstance.qid = this.qid; 
   }
 
   getQuestionAuthor(id) {
@@ -153,6 +162,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       modal.result;
       modal.componentInstance.tipo = 'Pregunta';
       modal.componentInstance.question = question;
+      modal.componentInstance.comesFromQuestionComponent = true
     }
   }
   editAnswer(id) {
@@ -166,9 +176,5 @@ export class QuestionComponent implements OnInit, OnDestroy {
     modal.componentInstance.aid = this.aid;
     modal.componentInstance.responses = this.responses;
     modal.componentInstance.date = date;
-  }
-  showAlert(i) {
-    this.deleteMode = true;
-    this.position = i;
-  }
+  }  
 }

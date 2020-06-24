@@ -55,7 +55,7 @@
       <div>
         <button
           *ngIf="isAnswerAuthor(response.uid)"
-          (click)="showAlert(i)"
+          (click)="showAlert(aid, i)"
           class="btn btn-danger mr-2"
         >
           <fa-icon [icon]="faTrash"></fa-icon>
