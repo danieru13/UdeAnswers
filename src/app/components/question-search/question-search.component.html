@@ -1,53 +1,43 @@
 <div class="question-component mt-4">
     <h3>Resultados de la busqueda:</h3>
-    <div *ngIf="_questions.result.length >0; else sinitems">
-    </div>
-    <div>
-        <ul *ngFor="let question of _questions.result; let i = index">
-            <div class="card preguntas" >
-                <a class="redirect" [routerLink]="['/question', question._id]"></a>
-                <div class="card-body">
-                  <a class="card-title" [routerLink]="['/question', question._id]">{{
-                    question.content
-                  }}</a>
-                  <p class="card-text"></p>
-                  <div class="actions">
-                    <a
-                      *ngIf="!isAuthor(question)"
-                      [routerLink]="['/question', question._id]"
-                      class="btn btn-success"
-                      >Responder</a
-                    >
-                    <button
-                      *ngIf="isAuthor(question)"
-                      (click)="showAlert(i)"
-                      type="button"
-                      class="btn btn-danger"                            
-                    >
-                      Borrar
-                    </button>
-                    <div
-                      *ngIf="deleteMode && position == i"
-                      class="alert alert-danger mt-2"
-                      role="alert"
-                    >
-                      Está seguro que desea eliminar la pregunta?
-                      <button
-                        class="btn btn-secondary"
-                        (click)="deleteQuestion(question, 'Pregunta eliminada correctamente')"
-                      >
-                        Si
-                      </button>
-                      <button class="btn btn-secondary" (click)="deleteMode = false">
-                        No
-                      </button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-              
-        </ul>        
+    <div *ngIf="questions.length >0; else sinitems">      
     </div>    
+    <div class="mt-3">
+      <ul *ngFor="let question of questions; let i = index">
+          <div class="card preguntas" >
+              <a class="redirect" [routerLink]="['/question', question._id]"></a>
+              <div class="card-header info-card-header">
+                <img class="img-perfil mr-sm-2" src="{{ question.authorImg }}" alt="..." />
+                <div>
+                  <p class="my-0">{{ question.authorName }}</p>
+                  <p *ngIf="question.date">{{question?.date.toDate() | date: 'MMM d, y, h:mm a'}}</p>
+                </div>    
+              </div>      
+              <div class="card-body">
+                <a class="card-title" [routerLink]="['/question', question._id]">{{
+                  question.content
+                }}</a>
+                <p class="card-text"></p>
+                <div class="actions">
+                  <button
+                    *ngIf="!isAuthor(question)"
+                    [routerLink]="['/question', question._id]"
+                    class="btn btn-success"
+                    ><fa-icon [icon]="faComment"></fa-icon></button
+                  >
+                  <button
+                    *ngIf="isAuthor(question)"
+                    (click)="deleteQuestion(question)"
+                    type="button"
+                    class="btn btn-danger"                            
+                  >
+                  <fa-icon [icon]="faTrash"></fa-icon>
+                  </button>                    
+                </div>
+              </div>
+          </div>              
+      </ul>        
+  </div>    
     <ng-template #sinitems>
         <div class="mt-3">
             <span>No hay datos</span> 

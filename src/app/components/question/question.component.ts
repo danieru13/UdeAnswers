@@ -138,7 +138,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       modal.result;
       modal.componentInstance.tipo = 'Pregunta';
       modal.componentInstance.question = question;
-      modal.componentInstance.comesFromQuestionComponent = true
+      modal.componentInstance.toList = true
     }
   }
   editAnswer(id) {

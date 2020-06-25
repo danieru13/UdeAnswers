@@ -26,7 +26,7 @@ export class ConfirmDeleteComponent implements OnInit {
   tipo: string; //Indica si lo que llega es pregunta o respuesta
   responses: any[]; //Array de respuestas en una pregunta  
   qid: string; // Id de pregunta
-  comesFromQuestionComponent: Boolean
+  toList: Boolean //Control para regresar a la página principal
   
   constructor(
     private formBuilder: FormBuilder,
@@ -50,7 +50,7 @@ export class ConfirmDeleteComponent implements OnInit {
           .deleteQuestion(this.question)
           .then(() => this.activeModal.dismiss());
         this.toastService.showSuccess(msg);
-        if(this.comesFromQuestionComponent){
+        if(this.toList){
           this.gotoList();
         }        
       } else {
