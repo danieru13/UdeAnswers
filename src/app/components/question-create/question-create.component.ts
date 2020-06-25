@@ -48,11 +48,11 @@ export class QuestionCreateComponent implements OnInit {
       await this.questionService
         .addQuestion(this.question)
         .then(() => {
-          this.activeModal.dismiss() 
-          if(this.router.url.includes("search")){
-            this.router.navigate(['/questions'])
-          }    
+          this.activeModal.dismiss()           
         });            
+        if(this.router.url.includes("search")){
+          this.router.navigate(['/questions'])
+        }    
       this.question.content = '';      
       this.toastService.showSuccess(msg)
     } catch (error) {
