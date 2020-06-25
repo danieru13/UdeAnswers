@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable} from 'rxjs';
 import { map } from 'rxjs/operators'
 import { Question } from '../models/question';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -15,9 +16,9 @@ export class QuestionService {
   private questionDoc: AngularFirestoreDocument<Question>;
   private collectionName = "questions";
   private db = this.firestore.collection(this.collectionName, ref => ref.orderBy('date','desc'));
-  result: Question[];
+  result: any[];
 
-  constructor(private firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore, private authService: AuthService) {
     this.questionsCollection = this.db;
     this.questions = this.questionsCollection.snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
@@ -99,6 +100,16 @@ export class QuestionService {
         if (lower.indexOf(s) >= 0) {
           this.result.push(q)
         }
+        this.result.forEach((question) => {          
+          //Recorre las preguntas para agregar la imagen y el nombre del autor
+          this.authService
+            .getUserById(question.author)
+            .get()
+            .subscribe((user) => {              
+              question.authorName = user.data().displayName;
+              question.authorImg = user.data().photoURL;
+            });
+        });
       })
     })
   }
