@@ -3,3 +3,7 @@ img{
     
     margin: 0 auto;
 }
+
+.google-btn{
+    cursor: pointer;
+}
